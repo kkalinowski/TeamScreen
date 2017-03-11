@@ -4,7 +4,12 @@ using RestEase;
 
 namespace TeamScreen.TeamCity
 {
-    public class TeamCityService
+    public interface ITeamCityService
+    {
+        Task<Build[]> GetBuilds(string path);
+    }
+
+    public class TeamCityService : ITeamCityService
     {
         public async Task<Build[]> GetBuilds(string path)
         {

@@ -1,1 +1,8 @@
-﻿<h1>TeamCity status</h1>
+﻿@model IEnumerable<TeamScreen.TeamCity.Build>
+
+<h1>TeamCity status</h1>
+
+@foreach (var build in Model)
+{
+    <h2>@build.Name - @build.Status</h2>
+}
