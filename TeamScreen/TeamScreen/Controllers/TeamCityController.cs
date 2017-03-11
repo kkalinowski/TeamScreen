@@ -15,7 +15,7 @@ namespace TeamScreen.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var builds = await _teamCityService.GetBuilds("");
+            var builds = await _teamCityService.GetBuilds("","", "");
             return View(builds);
         }
     }
