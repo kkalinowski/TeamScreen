@@ -1,8 +1,16 @@
-﻿@model IEnumerable<TeamScreen.TeamCity.BuildJob>
+﻿@using TeamScreen.TeamCity
+@model IEnumerable<BuildJob>
 
 <h1>TeamCity status</h1>
 
 @foreach (var build in Model)
 {
-    <h2>@build.Project.Name - @build.Name - @build.BuildCollection.Builds.FirstOrDefault().Status</h2>
+    if (build.BuildCollection.Builds.FirstOrDefault().Status == BuildStatus.Success)
+    {
+        <h2 style="color: green">@build.Project.Name - @build.Name</h2>
+    }
+    else
+    {
+        <h2 style="color: red">@build.Project.Name - @build.Name</h2>
+    }
 }
