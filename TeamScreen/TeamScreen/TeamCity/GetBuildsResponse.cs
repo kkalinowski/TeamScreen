@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace TeamScreen.TeamCity
 {
@@ -26,6 +27,13 @@ namespace TeamScreen.TeamCity
 
     public class Build
     {
-        public string Status { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public BuildStatus Status { get; set; }
+    }
+
+    public enum BuildStatus
+    {
+        Success,
+        Failure
     }
 }
