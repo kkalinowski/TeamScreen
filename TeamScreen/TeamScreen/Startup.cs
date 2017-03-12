@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using TeamScreen.Data;
 using TeamScreen.Models;
 using TeamScreen.Services;
+using TeamScreen.TeamCity;
 
 namespace TeamScreen
 {
@@ -52,6 +53,7 @@ namespace TeamScreen
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddSingleton<ITeamCityService, TeamCityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

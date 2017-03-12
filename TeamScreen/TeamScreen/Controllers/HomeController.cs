@@ -10,7 +10,7 @@ namespace TeamScreen.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "TeamCity");
         }
 
         public IActionResult About()
