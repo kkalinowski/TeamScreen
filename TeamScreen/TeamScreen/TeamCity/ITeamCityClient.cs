@@ -12,7 +12,7 @@ namespace TeamScreen.TeamCity
         AuthenticationHeaderValue Authorization { get; set; }
 
         [Get("/httpAuth/app/rest/projects")]
-        Task<List<Project>> GetProjectsAsync();
+        Task<GetProjectsResponse> GetProjectsAsync();
 
         [Get("/httpAuth/app/rest/buildTypes?locator=affectedProject:(id:{projectId})&fields=buildType(id,name,builds($locator(running:false,canceled:false,count:1),build(number,status,statusText)))")]
         Task<List<Build>> GetBuildsWithStatusesAsync([Path]string projectId);

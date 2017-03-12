@@ -21,7 +21,7 @@ namespace TeamScreen.TeamCity
             api.Authorization = new AuthenticationHeaderValue("Basic", credentials);
 
             var projects = await api.GetProjectsAsync();
-            return projects
+            return projects.Project
                 .SelectMany(x => api.GetBuildsWithStatusesAsync(x.Id).Result)
                 .ToArray();
         }
