@@ -12,6 +12,8 @@ namespace TeamScreen.TeamCity
     public class BuildJob
     {
         public string Name { get; set; }
+        public Project Project { get; set; }
+
         [JsonProperty(PropertyName = "builds")]
         public BuildCollection BuildCollection { get; set; }
     }

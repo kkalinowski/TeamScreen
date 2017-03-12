@@ -14,6 +14,8 @@ namespace TeamScreen.TeamCity
 
     public class TeamCityService : ITeamCityService
     {
+        private const string RootProject = "_Root";
+
         public async Task<BuildJob[]> GetBuilds(string path, string username, string password)
         {
             var api = RestClient.For<ITeamCityClient>(path);
@@ -22,6 +24,7 @@ namespace TeamScreen.TeamCity
 
             var projects = await api.GetProjectsAsync();
             return projects.Projects
+                .Where(x => x.Id != RootProject)
                 .SelectMany(x => api.GetBuildsWithStatusesAsync(x.Id).Result.BuildJobs)
                 .ToArray();
         }

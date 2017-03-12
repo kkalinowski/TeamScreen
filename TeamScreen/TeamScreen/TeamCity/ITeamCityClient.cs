@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using RestEase;
 
@@ -14,7 +13,7 @@ namespace TeamScreen.TeamCity
         [Get("/httpAuth/app/rest/projects")]
         Task<GetProjectsResponse> GetProjectsAsync();
 
-        [Get("/httpAuth/app/rest/buildTypes?locator=affectedProject:(id:{projectId})&fields=buildType(id,name,builds($locator(running:false,canceled:false,count:1),build(number,status,statusText)))")]
+        [Get("/httpAuth/app/rest/buildTypes?locator=affectedProject:(id:{projectId})&fields=buildType(id,name,project,builds($locator(running:false,canceled:false,count:1),build(number,status,statusText)))")]
         Task<GetBuildsResponse> GetBuildsWithStatusesAsync([Path]string projectId);
     }
 }

@@ -4,5 +4,5 @@
 
 @foreach (var build in Model)
 {
-    <h2>@build.Name - @build.BuildCollection.Builds.FirstOrDefault().Status</h2>
+    <h2>@build.Project.Name - @build.Name - @build.BuildCollection.Builds.FirstOrDefault().Status</h2>
 }
