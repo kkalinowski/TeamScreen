@@ -4,9 +4,14 @@ using System.Text;
 using System.Threading.Tasks;
 using RestEase;
 
-namespace TeamScreen.JIRA
+namespace TeamScreen.Jira
 {
-    public class JiraService
+    public interface IJiraService
+    {
+        Task<GetIssuesForSprintResponse> GetIssues(string path, string username, string password, int boardId, int sprintId);
+    }
+
+    public class JiraService : IJiraService
     {
         public async Task<GetIssuesForSprintResponse> GetIssues(string path, string username, string password, int boardId, int sprintId)
         {

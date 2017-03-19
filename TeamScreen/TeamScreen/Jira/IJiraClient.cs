@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using RestEase;
 
-namespace TeamScreen.JIRA
+namespace TeamScreen.Jira
 {
     public interface IJiraClient
     {
@@ -10,6 +10,6 @@ namespace TeamScreen.JIRA
         AuthenticationHeaderValue Authorization { get; set; }
 
         [Get("rest/agile/1.0/board/{boardId}/sprint/{sprintId}/issue")]
-        Task<GetIssuesForSprintResponse> GetIssuesForSprint(int boardId, int sprintId);
+        Task<GetIssuesForSprintResponse> GetIssuesForSprint([Path]int boardId, [Path]int sprintId);
     }
 }

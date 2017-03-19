@@ -1,4 +1,4 @@
-﻿namespace TeamScreen.JIRA
+﻿namespace TeamScreen.Jira
 {
     public class GetIssuesForSprintResponse
     {

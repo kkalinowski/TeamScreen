@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TeamScreen.Data;
+using TeamScreen.Jira;
 using TeamScreen.Models;
 using TeamScreen.Services;
 using TeamScreen.TeamCity;
@@ -54,7 +55,8 @@ namespace TeamScreen
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddSingleton<ITeamCityService, TeamCityService>();
-            services.AddSingleton<IConfigurationRoot>(Configuration);
+            services.AddSingleton<IJiraService, JiraService>();
+            services.AddSingleton(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
