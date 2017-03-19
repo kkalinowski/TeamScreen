@@ -14,7 +14,7 @@
     public class Fields
     {
         public string Summary { get; set; }
-        public string Status { get; set; }
+        public Status Status { get; set; }
     }
 
     public class Status

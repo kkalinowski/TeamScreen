@@ -1,7 +1,9 @@
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using TeamScreen.Jira;
+using TeamScreen.Models.Jira;
 
 namespace TeamScreen.Controllers
 {
@@ -23,8 +25,12 @@ namespace TeamScreen.Controllers
             var password = _configurationRoot["JiraPassword"];
             var boardId = int.Parse(_configurationRoot["JiraBoardId"]);
             var sprintId = int.Parse(_configurationRoot["JiraSprintId"]);
-            var issues = await _jiraService.GetIssues(url, username, password, boardId, sprintId);
-            return View(issues);
+            var response = await _jiraService.GetIssues(url, username, password, boardId, sprintId);
+
+            var issuesByStatus = response.Issues
+                .GroupBy(x => x.Fields.Status.Name)
+                .ToDictionary(x => x.Key, x => x.ToArray());
+            return View(new JiraIssuesModel { Issues = issuesByStatus });
         }
     }
 }
