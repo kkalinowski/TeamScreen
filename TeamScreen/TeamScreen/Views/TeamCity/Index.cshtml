@@ -14,3 +14,11 @@
         <h2 style="color: red">@build.Project.Name - @build.Name</h2>
     }
 }
+
+@section Scripts{
+    <script type="text/javascript">
+        window.setTimeout(function () {
+            window.location.href = '@Url.Action("Index","Jira")';
+        }, 60000);
+    </script>
+}
