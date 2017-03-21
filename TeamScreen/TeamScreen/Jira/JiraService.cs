@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,18 +9,19 @@ namespace TeamScreen.Jira
 {
     public interface IJiraService
     {
-        Task<GetIssuesForSprintResponse> GetIssues(string path, string username, string password, int boardId, int sprintId);
+        Task<GetIssuesForSprintResponse> GetIssuesForActiveSprint(string path, string username, string password, int boardId);
     }
 
     public class JiraService : IJiraService
     {
-        public async Task<GetIssuesForSprintResponse> GetIssues(string path, string username, string password, int boardId, int sprintId)
+        public async Task<GetIssuesForSprintResponse> GetIssuesForActiveSprint(string path, string username, string password, int boardId)
         {
             var api = RestClient.For<IJiraClient>(path);
             var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{password}"));
             api.Authorization = new AuthenticationHeaderValue("Basic", credentials);
 
-            return await api.GetIssuesForSprint(boardId, sprintId);
+            var activeSprint = await api.GetActiveSprint(boardId);
+            return await api.GetIssuesForSprint(boardId, activeSprint.Sprints.First().Id);
         }
     }
 }

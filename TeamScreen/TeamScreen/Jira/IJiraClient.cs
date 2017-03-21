@@ -11,5 +11,8 @@ namespace TeamScreen.Jira
 
         [Get("rest/agile/1.0/board/{boardId}/sprint/{sprintId}/issue")]
         Task<GetIssuesForSprintResponse> GetIssuesForSprint([Path]int boardId, [Path]int sprintId);
+
+        [Get("rest/agile/1.0/board/{boardId}/sprint?state=active")]
+        Task<GetActiveSprintResponse> GetActiveSprint([Path]int boardId);
     }
 }

@@ -24,8 +24,7 @@ namespace TeamScreen.Controllers
             var username = _configurationRoot["JiraUsername"];
             var password = _configurationRoot["JiraPassword"];
             var boardId = int.Parse(_configurationRoot["JiraBoardId"]);
-            var sprintId = int.Parse(_configurationRoot["JiraSprintId"]);
-            var response = await _jiraService.GetIssues(url, username, password, boardId, sprintId);
+            var response = await _jiraService.GetIssuesForActiveSprint(url, username, password, boardId);
 
             var issuesByStatus = response.Issues
                 .GroupBy(x => x.Fields.Status.Name)
