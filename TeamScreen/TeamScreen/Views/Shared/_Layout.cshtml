@@ -19,7 +19,7 @@
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="display: none;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -43,7 +43,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer style="display: none;">
             <p>&copy; 2017 - TeamScreen</p>
         </footer>
     </div>

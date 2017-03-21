@@ -1,0 +1,24 @@
+﻿@model TeamScreen.Models.Jira.JiraIssuesModel
+
+<h1>JIRA status</h1>
+
+@foreach (var status in Model.Issues)
+{
+    <h2>@status.Key</h2>
+    foreach (var issue in status.Value)
+    {
+        <p>
+            @issue.Key
+            <br />
+            @issue.Fields.Summary
+        </p>
+    }
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        window.setTimeout(function () {
+            window.location.href = '@Url.Action("Index","TeamCity")';
+        }, 60000);
+    </script>
+}

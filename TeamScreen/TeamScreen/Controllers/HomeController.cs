@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace TeamScreen.Controllers
 {
@@ -10,7 +6,7 @@ namespace TeamScreen.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "TeamCity");
+            return RedirectToAction("Index", "Jira");
         }
 
         public IActionResult About()
