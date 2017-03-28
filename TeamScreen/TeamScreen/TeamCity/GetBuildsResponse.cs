@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -13,6 +14,7 @@ namespace TeamScreen.TeamCity
     public class BuildJob
     {
         public string Name { get; set; }
+
         public Project Project { get; set; }
 
         [JsonProperty(PropertyName = "builds")]
@@ -29,11 +31,50 @@ namespace TeamScreen.TeamCity
     {
         [JsonConverter(typeof(StringEnumConverter))]
         public BuildStatus Status { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public BuildState State { get; set; }
+
+        //[JsonConverter(typeof(JavaScriptDateTimeConverter))]
+        public DateTime? StartDate { get; set; }
+
+        //[JsonConverter(typeof(JavaScriptDateTimeConverter))]
+        public DateTime? FinishDate { get; set; }
+
+        [JsonProperty(PropertyName = "triggered")]
+        public BuildTrigger Trigger { get; set; }
+    }
+
+    public class BuildTrigger
+    {
+        [JsonConverter(typeof(StringEnumConverter))]
+        public TriggerType Type { get; set; }
+
+        public TeamCityUser User { get; set; }
+    }
+
+    public class TeamCityUser
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
+
+    public enum TriggerType
+    {
+        User
     }
 
     public enum BuildStatus
     {
         Success,
-        Failure
+        Failure,
+        Error
+    }
+
+    public enum BuildState
+    {
+        Queued,
+        Running,
+        Finished
     }
 }
