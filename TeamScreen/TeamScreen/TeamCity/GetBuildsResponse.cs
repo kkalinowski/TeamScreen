@@ -35,10 +35,10 @@ namespace TeamScreen.TeamCity
         [JsonConverter(typeof(StringEnumConverter))]
         public BuildState State { get; set; }
 
-        //[JsonConverter(typeof(JavaScriptDateTimeConverter))]
+        [JsonConverter(typeof(TeamCityDateConverter))]
         public DateTime? StartDate { get; set; }
 
-        //[JsonConverter(typeof(JavaScriptDateTimeConverter))]
+        [JsonConverter(typeof(TeamCityDateConverter))]
         public DateTime? FinishDate { get; set; }
 
         [JsonProperty(PropertyName = "triggered")]
@@ -61,7 +61,9 @@ namespace TeamScreen.TeamCity
 
     public enum TriggerType
     {
-        User
+        User,
+        VCS,
+        BuildType//don't really know what it is
     }
 
     public enum BuildStatus
