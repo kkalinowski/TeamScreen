@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TeamScreen.TeamCity;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using TeamScreen.Models.TeamCity;
 
 namespace TeamScreen.Controllers
 {
@@ -22,7 +25,36 @@ namespace TeamScreen.Controllers
             var username = _configurationRoot["TeamCityUsername"];
             var password = _configurationRoot["TeamCityPassword"];
             var builds = await _teamCityService.GetBuilds(url, username, password);
-            return View(builds);
+            return View(MapToModels(builds));
+        }
+
+        public Dictionary<string, TeamCityBuildModel[]> MapToModels(IEnumerable<BuildJob> buildJobs)
+        {
+            return buildJobs
+                .GroupBy(x => x.Project.Name)
+                .ToDictionary(x => x.Key, y => y.Select(MapSingleBuild).ToArray());
+        }
+
+        public TeamCityBuildModel MapSingleBuild(BuildJob buildJob)
+        {
+            var lastBuild = buildJob.BuildCollection.Builds.First();
+            return new TeamCityBuildModel
+            {
+                Name = buildJob.Name,
+                Date = lastBuild.FinishDate ?? lastBuild.StartDate,
+                Status = MapStatus(lastBuild),
+                TrrggeredBy = lastBuild.Trigger?.User?.Name
+            };
+        }
+
+        public TeamCityStatusModel MapStatus(Build build)
+        {
+            if(build.State != BuildState.Finished)
+                return TeamCityStatusModel.Pending;
+            else if (build.Status != BuildStatus.Success)
+                return TeamCityStatusModel.Failure;
+            else
+                return TeamCityStatusModel.Success;
         }
     }
 }

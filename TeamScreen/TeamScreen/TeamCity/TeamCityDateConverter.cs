@@ -6,7 +6,7 @@ namespace TeamScreen.TeamCity
 {
     public class TeamCityDateConverter : JsonConverter
     {
-        static readonly string[] Iso8601DateTimeFormats = { 
+        private static readonly string[] Iso8601DateTimeFormats = { 
             // Basic formats
             "yyyyMMddTHHmmsszzz",
             "yyyyMMddTHHmmsszz",

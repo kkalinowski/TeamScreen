@@ -25,7 +25,7 @@ namespace TeamScreen.TeamCity
             var projects = await api.GetProjectsAsync();
             return projects.Projects
                 .Where(x => x.Id != RootProject)
-                .SelectMany(x => api.GetBuildsWithStatusesAsync(x.Id).Result.BuildJobs)
+                .SelectMany(x => api.GetLastBuildForProjectAsync(x.Id).Result.BuildJobs)
                 .ToArray();
         }
     }

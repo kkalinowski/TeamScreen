@@ -1,17 +1,25 @@
-﻿@using TeamScreen.TeamCity
-@model IEnumerable<BuildJob>
+﻿@using TeamScreen.Models.TeamCity
+@model Dictionary<string, TeamCityBuildModel[]>
 
 <h1>TeamCity status</h1>
 
-@foreach (var build in Model)
+@foreach (var project in Model)
 {
-    if (build.BuildCollection.Builds.FirstOrDefault().Status == BuildStatus.Success)
+    <h2>@project.Key</h2>
+    foreach (var build in project.Value)
     {
-        <h2 style="color: green">@build.Project.Name - @build.Name</h2>
-    }
-    else
-    {
-        <h2 style="color: red">@build.Project.Name - @build.Name</h2>
+        if (build.Status == TeamCityStatusModel.Success)
+        {
+            <h2 style="color: green">@build.Name @build.Date @build.TrrggeredBy</h2>
+        }
+        else if (build.Status == TeamCityStatusModel.Pending)
+        {
+            <h2 style="color: orange">@build.Name @build.Date @build.TrrggeredBy</h2>
+        }
+        else
+        {
+            <h2 style="color: red">@build.Name @build.Date @build.TrrggeredBy</h2>
+        }
     }
 }
 

@@ -36,7 +36,7 @@ namespace TeamScreen.TeamCity
         public BuildState State { get; set; }
 
         [JsonConverter(typeof(TeamCityDateConverter))]
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [JsonConverter(typeof(TeamCityDateConverter))]
         public DateTime? FinishDate { get; set; }

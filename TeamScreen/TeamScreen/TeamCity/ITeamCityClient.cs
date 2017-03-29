@@ -14,6 +14,6 @@ namespace TeamScreen.TeamCity
         Task<GetProjectsResponse> GetProjectsAsync();
 
         [Get("/httpAuth/app/rest/buildTypes?locator=affectedProject:(id:{projectId})&fields=buildType(name,project(id,name),builds($locator(canceled:false,count:1),build(status,state,startDate,finishDate,triggered(user(name,email)))))")]
-        Task<GetBuildsResponse> GetBuildsWithStatusesAsync([Path]string projectId);
+        Task<GetBuildsResponse> GetLastBuildForProjectAsync([Path]string projectId);
     }
 }
