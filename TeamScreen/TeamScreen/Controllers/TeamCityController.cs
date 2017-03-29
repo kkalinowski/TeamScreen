@@ -43,7 +43,7 @@ namespace TeamScreen.Controllers
                 Name = buildJob.Name,
                 Date = lastBuild.FinishDate ?? lastBuild.StartDate,
                 Status = MapStatus(lastBuild),
-                TrrggeredBy = lastBuild.Trigger?.User?.Name
+                TrrggeredBy = MapTriggeredBy(lastBuild.Trigger)
             };
         }
 
@@ -55,6 +55,16 @@ namespace TeamScreen.Controllers
                 return TeamCityStatusModel.Failure;
             else
                 return TeamCityStatusModel.Success;
+        }
+
+        public string MapTriggeredBy(BuildTrigger trigger)
+        {
+            if (trigger.Type == TriggerType.User)
+                return trigger.User.Name;
+            else if (trigger.Type == TriggerType.BuildType)
+                return trigger.DependantBuild?.Name;
+            else
+                return "Source control";
         }
     }
 }

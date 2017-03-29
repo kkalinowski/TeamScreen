@@ -51,6 +51,9 @@ namespace TeamScreen.TeamCity
         public TriggerType Type { get; set; }
 
         public TeamCityUser User { get; set; }
+
+        [JsonProperty(PropertyName = "buildType")]
+        public BuildJob DependantBuild { get; set; }
     }
 
     public class TeamCityUser
@@ -63,7 +66,7 @@ namespace TeamScreen.TeamCity
     {
         User,
         VCS,
-        BuildType//don't really know what it is
+        BuildType
     }
 
     public enum BuildStatus
