@@ -2,18 +2,33 @@
 
 <h1>JIRA status</h1>
 
-@foreach (var column in Model)
-{
-    <h2>@column.Column</h2>
-    foreach (var issue in column.Issues)
-    {
-        <p>
-            @issue.Key
-            <br />
-            @issue.Fields.Summary
-        </p>
-    }
-}
+<table class="issues-table">
+    <tr>
+        @foreach (var column in Model)
+        {
+            <th>@column.Column</th>
+        }
+    </tr>
+    <tr>
+        @foreach (var column in Model)
+        {
+            <td class="issue-column">
+                <ul class="issue-list">
+                    @foreach (var issue in column.Issues)
+                {
+                        <li>
+                            <p>
+                                <b>@issue.Key</b> 
+                                <br />
+                                @issue.Fields.Summary
+                            </p>
+                        </li>
+                    }
+                </ul>
+            </td>
+        }
+    </tr>
+</table>
 
 @*@section Scripts{
     <script type="text/javascript">
