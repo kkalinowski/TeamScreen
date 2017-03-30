@@ -7,7 +7,7 @@ namespace TeamScreen.Models.TeamCity
         public string Name { get; set; }
         public TeamCityStatusModel Status { get; set; }
         public DateTime Date { get; set; }
-        public string TrrggeredBy { get; set; }
+        public string TriggeredBy { get; set; }
     }
 
     public enum TeamCityStatusModel

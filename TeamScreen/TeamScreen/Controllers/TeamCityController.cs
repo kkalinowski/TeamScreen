@@ -43,7 +43,7 @@ namespace TeamScreen.Controllers
                 Name = buildJob.Name,
                 Date = lastBuild.FinishDate ?? lastBuild.StartDate,
                 Status = MapStatus(lastBuild),
-                TrrggeredBy = MapTriggeredBy(lastBuild.Trigger)
+                TriggeredBy = MapTriggeredBy(lastBuild.Trigger)
             };
         }
 
