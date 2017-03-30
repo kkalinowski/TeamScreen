@@ -1,11 +1,11 @@
-﻿@model TeamScreen.Models.Jira.JiraIssuesModel
+﻿@model IEnumerable<TeamScreen.Models.Jira.JiraIssuesModel>
 
 <h1>JIRA status</h1>
 
-@foreach (var status in Model.Issues)
+@foreach (var column in Model)
 {
-    <h2>@status.Key</h2>
-    foreach (var issue in status.Value)
+    <h2>@column.Column</h2>
+    foreach (var issue in column.Issues)
     {
         <p>
             @issue.Key
@@ -15,10 +15,10 @@
     }
 }
 
-@section Scripts{
+@*@section Scripts{
     <script type="text/javascript">
         window.setTimeout(function () {
             window.location.href = '@Url.Action("Index","TeamCity")';
         }, 60000);
     </script>
-}
+}*@

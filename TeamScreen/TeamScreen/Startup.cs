@@ -85,7 +85,7 @@ namespace TeamScreen
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=TeamCity}/{action=Index}/{id?}");
+                    template: "{controller=Jira}/{action=Index}/{id?}");
             });
         }
     }
