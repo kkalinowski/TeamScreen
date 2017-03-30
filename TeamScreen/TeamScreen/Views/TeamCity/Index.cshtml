@@ -11,28 +11,53 @@
         if (build.Status == TeamCityStatusModel.Success)
         {
             <div>
-                <h2 style="color: green">@build.Name <small class="pull-right vertical-middle">@build.Date</small></h2>
+                <h2>
+                    <span class="build-name">@build.Name </span>
+                    <small class="build-info pull-right">@build.Date</small>
+                </h2>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <span class="sr-only">100% Complete (success)</span>
+                    </div>
+                </div>
             </div>
         }
         else if (build.Status == TeamCityStatusModel.Pending)
         {
             <div>
-                <h2 style="color: orange">@build.Name <small class="pull-right vertical-middle">@build.TrrggeredBy @build.Date</small></h2>
+                <h2>
+                    <span class="build-name">@build.Name</span>
+                    <small class="build-info pull-right">@build.TrrggeredBy @build.Date</small>
+                </h2>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"
+                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <span class="sr-only">Build in progress</span>
+                    </div>
+                </div>
             </div>
         }
         else
         {
             <div>
-                <h2 style="color: red">@build.Name <small class="pull-right vertical-middle">@build.TrrggeredBy @build.Date</small></h2>
+                <h2>
+                    <span class="build-name">@build.Name</span>
+                    <small class="build-info pull-right">@build.TrrggeredBy @build.Date</small>
+                </h2>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <span class="sr-only">100% Complete (failure)</span>
+                    </div>
+                </div>
             </div>
         }
     }
 }
 
-@section Scripts{
-    <script type="text/javascript">
-        window.setTimeout(function () {
-            window.location.href = '@Url.Action("Index","Jira")';
-        }, 60000);
-    </script>
-}
+@*@section Scripts{
+        <script type="text/javascript">
+            window.setTimeout(function () {
+                window.location.href = '@Url.Action("Index","Jira")';
+            }, 60000);
+        </script>
+    }*@

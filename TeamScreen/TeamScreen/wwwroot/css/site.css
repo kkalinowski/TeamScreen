@@ -47,3 +47,12 @@ textarea {
 .vertical-middle {
     vertical-align: middle;
 }
+
+
+.build-name {
+    margin-top: 0.5em;
+}
+
+.build-info {
+    margin-top: 0.5em;
+}
