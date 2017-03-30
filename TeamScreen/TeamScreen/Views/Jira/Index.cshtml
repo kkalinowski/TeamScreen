@@ -18,7 +18,10 @@
                 {
                         <li>
                             <p>
-                                <b>@issue.Key</b> 
+                                <b>
+                                    <span>@issue.Key</span>
+                                    <span class="pull-right">@issue.Fields.Assignee.Name</span>
+                                </b>
                                 <br />
                                 @issue.Fields.Summary
                             </p>
@@ -31,9 +34,9 @@
 </table>
 
 @*@section Scripts{
-    <script type="text/javascript">
-        window.setTimeout(function () {
-            window.location.href = '@Url.Action("Index","TeamCity")';
-        }, 60000);
-    </script>
-}*@
+        <script type="text/javascript">
+            window.setTimeout(function () {
+                window.location.href = '@Url.Action("Index","TeamCity")';
+            }, 60000);
+        </script>
+    }*@
