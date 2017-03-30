@@ -43,3 +43,7 @@ textarea {
         display: none;
     }
 }
+
+.vertical-middle {
+    vertical-align: middle;
+}

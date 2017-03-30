@@ -10,15 +10,21 @@
     {
         if (build.Status == TeamCityStatusModel.Success)
         {
-            <h2 style="color: green">@build.Name @build.Date @build.TrrggeredBy</h2>
+            <div>
+                <h2 style="color: green">@build.Name <small class="pull-right vertical-middle">@build.Date</small></h2>
+            </div>
         }
         else if (build.Status == TeamCityStatusModel.Pending)
         {
-            <h2 style="color: orange">@build.Name @build.Date @build.TrrggeredBy</h2>
+            <div>
+                <h2 style="color: orange">@build.Name <small class="pull-right vertical-middle">@build.TrrggeredBy @build.Date</small></h2>
+            </div>
         }
         else
         {
-            <h2 style="color: red">@build.Name @build.Date @build.TrrggeredBy</h2>
+            <div>
+                <h2 style="color: red">@build.Name <small class="pull-right vertical-middle">@build.TrrggeredBy @build.Date</small></h2>
+            </div>
         }
     }
 }
