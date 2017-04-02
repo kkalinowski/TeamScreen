@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using lib12.Collections;
 using TeamScreen.Models.TeamCity;
 using TeamScreen.TeamCity;
 
@@ -15,6 +16,7 @@ namespace TeamScreen.Services.TeamCity
         public Dictionary<string, TeamCityBuildModel[]> Map(IEnumerable<BuildJob> buildJobs)
         {
             return buildJobs
+                .Recover()
                 .GroupBy(x => x.Project.Name)
                 .ToDictionary(x => x.Key, y => y.Select(MapSingleBuild).ToArray());
         }
