@@ -21,7 +21,7 @@ namespace TeamScreen.Services.TeamCity
                 .ToDictionary(x => x.Key, y => y.Select(MapSingleBuild).ToArray());
         }
 
-        public TeamCityBuildModel MapSingleBuild(BuildJob buildJob)
+        private TeamCityBuildModel MapSingleBuild(BuildJob buildJob)
         {
             var lastBuild = buildJob.BuildCollection.Builds.First();
             return new TeamCityBuildModel
@@ -33,7 +33,7 @@ namespace TeamScreen.Services.TeamCity
             };
         }
 
-        public TeamCityStatusModel MapStatus(Build build)
+        private TeamCityStatusModel MapStatus(Build build)
         {
             if (build.State != BuildState.Finished)
                 return TeamCityStatusModel.Pending;
@@ -43,7 +43,7 @@ namespace TeamScreen.Services.TeamCity
                 return TeamCityStatusModel.Success;
         }
 
-        public string MapTriggeredBy(BuildTrigger trigger)
+        private string MapTriggeredBy(BuildTrigger trigger)
         {
             if (trigger.Type == TriggerType.User)
                 return trigger.User.Name;
