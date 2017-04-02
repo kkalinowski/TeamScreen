@@ -1,9 +1,4 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Wrapping element */
+﻿/* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -47,4 +42,44 @@ textarea {
     .carousel-caption {
         display: none;
     }
+}
+
+.vertical-middle {
+    vertical-align: middle;
+}
+
+
+.build-name {
+    font-size: 1.7em;
+}
+
+.build-info {
+    margin-top: 0.9em;
+}
+
+.issues-table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.issues-table th {
+    font-size: 2em;
+    font-weight: normal;
+}
+
+.issue-column {
+    vertical-align: top;
+}
+
+.issue-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-right: 1em;
+}
+
+.issue {
+    border: 1px solid gray;
+    padding: 0.3em;
+    height: 7em;
+    border-radius: 0.3em;
 }

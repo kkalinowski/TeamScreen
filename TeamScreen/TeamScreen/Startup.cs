@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +9,8 @@ using TeamScreen.Data;
 using TeamScreen.Jira;
 using TeamScreen.Models;
 using TeamScreen.Services;
+using TeamScreen.Services.Jira;
+using TeamScreen.Services.TeamCity;
 using TeamScreen.TeamCity;
 
 namespace TeamScreen
@@ -55,7 +53,9 @@ namespace TeamScreen
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddSingleton<ITeamCityService, TeamCityService>();
+            services.AddSingleton<IBuildMapper, BuildMapper>();
             services.AddSingleton<IJiraService, JiraService>();
+            services.AddSingleton<IIssueMapper, IssueMapper>();
             services.AddSingleton(Configuration);
         }
 
@@ -89,7 +89,7 @@ namespace TeamScreen
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Jira}/{action=Index}/{id?}");
             });
         }
     }

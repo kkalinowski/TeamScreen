@@ -1,9 +1,8 @@
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using TeamScreen.Jira;
-using TeamScreen.Models.Jira;
+using TeamScreen.Services.Jira;
 
 namespace TeamScreen.Controllers
 {
@@ -11,11 +10,13 @@ namespace TeamScreen.Controllers
     {
         private readonly IJiraService _jiraService;
         private readonly IConfigurationRoot _configurationRoot;
+        private readonly IIssueMapper _issueMapper;
 
-        public JiraController(IJiraService jiraService, IConfigurationRoot configurationRoot)
+        public JiraController(IJiraService jiraService, IConfigurationRoot configurationRoot, IIssueMapper issueMapper)
         {
             _jiraService = jiraService;
             _configurationRoot = configurationRoot;
+            _issueMapper = issueMapper;
         }
 
         public async Task<IActionResult> Index()
@@ -24,12 +25,13 @@ namespace TeamScreen.Controllers
             var username = _configurationRoot["JiraUsername"];
             var password = _configurationRoot["JiraPassword"];
             var boardId = int.Parse(_configurationRoot["JiraBoardId"]);
-            var response = await _jiraService.GetIssuesForActiveSprint(url, username, password, boardId);
+            var boardConfiguration = await _jiraService.GetBoardConfigurationAsync(url, username, password, boardId);
+            var issues = await _jiraService.GetIssuesForActiveSprintAsync(url, username, password, boardId);
 
-            var issuesByStatus = response.Issues
-                .GroupBy(x => x.Fields.Status.Name)
-                .ToDictionary(x => x.Key, x => x.ToArray());
-            return View(new JiraIssuesModel { Issues = issuesByStatus });
+            var models = _issueMapper.Map(issues, boardConfiguration);
+            return View(models);
         }
+
+
     }
 }

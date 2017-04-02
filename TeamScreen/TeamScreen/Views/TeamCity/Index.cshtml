@@ -1,24 +1,59 @@
-﻿@using TeamScreen.TeamCity
-@model IEnumerable<BuildJob>
+﻿@using TeamScreen.Models.TeamCity
+@model Dictionary<string, TeamCityBuildModel[]>
 
-<h1>TeamCity status</h1>
+<div class="container">
+    <h1>TeamCity status</h1>
 
-@foreach (var build in Model)
-{
-    if (build.BuildCollection.Builds.FirstOrDefault().Status == BuildStatus.Success)
+    @foreach (var project in Model)
     {
-        <h2 style="color: green">@build.Project.Name - @build.Name</h2>
+        <h2>@project.Key</h2>
+        foreach (var build in project.Value)
+        {
+            if (build.Status == TeamCityStatusModel.Success)
+            {
+                <div>
+                    <span class="build-name">@build.Name </span>
+                    <span class="build-info pull-right">@build.Date</span>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="sr-only">100% Complete (success)</span>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (build.Status == TeamCityStatusModel.Pending)
+            {
+                <div>
+                    <span class="build-name">@build.Name </span>
+                    <span class="build-info pull-right">@build.TriggeredBy @build.Date</span>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"
+                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="sr-only">Build in progress</span>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div>
+                    <span class="build-name">@build.Name </span>
+                    <span class="build-info pull-right">@build.TriggeredBy @build.Date</span>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="sr-only">100% Complete (failure)</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     }
-    else
-    {
-        <h2 style="color: red">@build.Project.Name - @build.Name</h2>
-    }
-}
+</div>
 
 @section Scripts{
     <script type="text/javascript">
-        window.setTimeout(function () {
-            window.location.href = '@Url.Action("Index","Jira")';
-        }, 60000);
+            window.setTimeout(function () {
+                window.location.href = '@Url.Action("Index","Jira")';
+            }, 60000);
     </script>
 }
