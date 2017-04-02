@@ -14,8 +14,7 @@ namespace TeamScreen.Services.Jira
 
     public class IssueMapper : IIssueMapper
     {
-        public JiraIssuesModel[] Map(GetIssuesForSprintResponse issuesResponse,
-            GetBoardConfigurationResponse boardConfigurationResponse)
+        public JiraIssuesModel[] Map(GetIssuesForSprintResponse issuesResponse, GetBoardConfigurationResponse boardConfigurationResponse)
         {
             var modelDict = MapBoardConfiguration(boardConfigurationResponse);
 
