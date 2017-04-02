@@ -10,6 +10,7 @@ using TeamScreen.Jira;
 using TeamScreen.Models;
 using TeamScreen.Services;
 using TeamScreen.Services.Jira;
+using TeamScreen.Services.TeamCity;
 using TeamScreen.TeamCity;
 
 namespace TeamScreen
@@ -52,6 +53,7 @@ namespace TeamScreen
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddSingleton<ITeamCityService, TeamCityService>();
+            services.AddSingleton<IBuildMapper, BuildMapper>();
             services.AddSingleton<IJiraService, JiraService>();
             services.AddSingleton<IIssueMapper, IssueMapper>();
             services.AddSingleton(Configuration);
