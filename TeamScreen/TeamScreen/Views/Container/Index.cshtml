@@ -2,10 +2,31 @@
 
 @section Scripts{
     <script type="text/javascript">
-        $("#mainContainer").load('@Url.Action("Content", "Jira")');
+        var vm = new Vue({
+            el: "#mainContainer",
+            data: {
+                nextIndex: 0,
+                availablePlugins: ['@Url.Action("Content", "Jira")', '@Url.Action("Content", "TeamCity")'],
+                interval: 5
+            },
 
-        window.setTimeout(function() {
-            $("#mainContainer").load('@Url.Action("Content", "TeamCity")');
-        }, 60000);
+            methods: {
+                loadNextPlugin: function() {
+                    $(this.$el).load(this.availablePlugins[this.nextIndex]);
+                    if (this.nextIndex < this.availablePlugins.length - 1)
+                        this.nextIndex++;
+                    else
+                        this.nextIndex = 0;
+                }
+            },
+
+            mounted: function() {
+                this.loadNextPlugin();
+
+                setInterval(function() {
+                    this.loadNextPlugin();
+                }.bind(this), this.interval * 1000);
+            }
+        });
     </script>
 }
