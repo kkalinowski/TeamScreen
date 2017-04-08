@@ -3,7 +3,8 @@
 
     <div class="controls">
         <i class="fa fa-chevron-left" aria-hidden="true" v-on:click="loadPreviousPlugin"></i>
-        <i class="fa fa-pause" aria-hidden="true"></i>
+        <i class="fa fa-pause" aria-hidden="true" v-if="!paused" v-on:click="pause"></i>
+        <i class="fa fa-play" aria-hidden="true" v-if="paused" v-on:click="resume"></i>
         <i class="fa fa-chevron-right" aria-hidden="true" v-on:click="loadNextPlugin"></i>
     </div>
 </div>
@@ -15,34 +16,47 @@
             data: {
                 index: 0,
                 availablePlugins: ['@Url.Action("Content", "Jira")', '@Url.Action("Content", "TeamCity")'],
-                interval: 60
+                interval: 60,
+                paused: false,
+                timer: 0,
             },
 
             methods: {
-                loadPreviousPlugin: function () {
-                    console.log("prev");
+                loadPreviousPlugin: function() {
                     if (this.index > 0)
                         this.index--;
                     else
                         this.index = this.availablePlugins.length - 1;
                     $("#contentContainer").load(this.availablePlugins[this.index]);
                 },
-                loadNextPlugin: function () {
-                    console.log("next");
+                loadNextPlugin: function() {
                     if (this.index < this.availablePlugins.length - 1)
                         this.index++;
                     else
                         this.index = 0;
                     $("#contentContainer").load(this.availablePlugins[this.index]);
+                },
+                pause: function() {
+                    this.paused = true;
+                },
+                resume: function() {
+                    this.paused = false;
+                },
+                tick: function () {
+                    if (this.paused)
+                        return;
+
+                    this.timer++;
+                    if (this.timer == this.interval) {
+                        this.loadNextPlugin();
+                        this.timer = 0;
+                    }
                 }
             },
 
             mounted: function() {
                 this.loadNextPlugin();
-
-                setInterval(function() {
-                    this.loadNextPlugin();
-                }.bind(this), this.interval * 1000);
+                setInterval(this.tick, 1000);
             }
         });
     </script>
