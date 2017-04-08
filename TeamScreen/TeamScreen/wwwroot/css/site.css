@@ -83,3 +83,14 @@ textarea {
     height: 7em;
     border-radius: 0.3em;
 }
+
+.controls {
+    font-size: 5em;
+    position: fixed;
+    top: 0.2em;
+    right: 0.5em;
+}
+
+.controls i:hover{
+    opacity: 0.7;
+}
