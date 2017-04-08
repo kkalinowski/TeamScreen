@@ -1,0 +1,11 @@
+<div id="mainContainer"></div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $("#mainContainer").load('@Url.Action("Content", "Jira")');
+
+        window.setTimeout(function() {
+            $("#mainContainer").load('@Url.Action("Content", "TeamCity")');
+        }, 60000);
+    </script>
+}

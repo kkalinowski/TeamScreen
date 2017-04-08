@@ -19,7 +19,7 @@ namespace TeamScreen.Controllers
             _issueMapper = issueMapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<PartialViewResult> Content()
         {
             var url = _configurationRoot["JiraUrl"];
             var username = _configurationRoot["JiraUsername"];
@@ -29,7 +29,7 @@ namespace TeamScreen.Controllers
             var issues = await _jiraService.GetIssuesForActiveSprintAsync(url, username, password, boardId);
 
             var models = _issueMapper.Map(issues, boardConfiguration);
-            return View(models);
+            return PartialView(models);
         }
 
 
