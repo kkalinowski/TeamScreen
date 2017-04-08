@@ -22,14 +22,14 @@
             },
 
             methods: {
-                loadPreviousPlugin: function() {
+                loadPreviousPlugin: function () {
                     if (this.index > 0)
                         this.index--;
                     else
                         this.index = this.availablePlugins.length - 1;
                     $("#contentContainer").load(this.availablePlugins[this.index]);
                 },
-                loadNextPlugin: function() {
+                loadNextPlugin: function () {
                     if (this.index < this.availablePlugins.length - 1)
                         this.index++;
                     else
@@ -51,11 +51,24 @@
                         this.loadNextPlugin();
                         this.timer = 0;
                     }
-                }
+                },
+
+                handleKeyboard: function (event) {
+                    if (event.keyCode === 32) //space
+                        this.paused = !this.paused;
+                    else if (event.keyCode === 37) //left arrow
+                        this.loadPreviousPlugin();
+                    else if (event.keyCode === 39) //right arrow
+                        this.loadNextPlugin();
+
+                    event.preventDefault();
+                },
             },
 
             mounted: function() {
                 this.loadNextPlugin();
+
+                $(document).keydown(this.handleKeyboard);
                 setInterval(this.tick, 1000);
             }
         });
