@@ -139,7 +139,7 @@ namespace TeamScreen.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(JiraController.Index), "Jira");
+            return RedirectToAction(nameof(ContainerController.Index), "Container");
         }
 
         //
@@ -467,7 +467,7 @@ namespace TeamScreen.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(JiraController.Index), "Jira");
+                return RedirectToAction(nameof(ContainerController.Index), "Container");
             }
         }
 

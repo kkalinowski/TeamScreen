@@ -19,7 +19,7 @@ namespace TeamScreen.Controllers
             _buildMapper = buildMapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<PartialViewResult> Content()
         {
             var url = _configurationRoot["TeamCityUrl"];
             var username = _configurationRoot["TeamCityUsername"];
@@ -27,7 +27,7 @@ namespace TeamScreen.Controllers
             var builds = await _teamCityService.GetBuilds(url, username, password);
 
             var models = _buildMapper.Map(builds);
-            return View(models);
+            return PartialView(models);
         }
     }
 }
