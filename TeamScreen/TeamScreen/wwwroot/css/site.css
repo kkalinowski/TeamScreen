@@ -94,3 +94,8 @@ textarea {
 .controls i:hover{
     opacity: 0.7;
 }
+
+.settings-button {
+    color: black;
+    margin-left: 0.1em;
+}
