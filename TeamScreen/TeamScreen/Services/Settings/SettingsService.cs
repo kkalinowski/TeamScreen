@@ -38,8 +38,9 @@ namespace TeamScreen.Services.Settings
             var existing = await _db.PluginSettings.FirstOrDefaultAsync(x => x.Plugin == plugin);
             if (existing != null)
                 existing.Value = jsonValue;
+            else
+                await _db.PluginSettings.AddAsync(PluginSetting.Create(plugin, jsonValue));
 
-            await _db.PluginSettings.AddAsync(PluginSetting.Create(plugin, jsonValue));
             await _db.SaveChangesAsync();
         }
     }
