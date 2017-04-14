@@ -1,3 +1,5 @@
+@model TeamScreen.Models.Settings.CoreSettings
+
 <div id="app">
     <div id="contentContainer"></div>
 
@@ -19,7 +21,7 @@
             data: {
                 index: 0,
                 availablePlugins: ['@Url.Action("Content", "Jira")', '@Url.Action("Content", "TeamCity")'],
-                interval: 60,
+                interval: @Model.Interval,
                 paused: false,
                 timer: 0,
             },
