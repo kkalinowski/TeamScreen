@@ -4,9 +4,9 @@ using TeamScreen.Models;
 
 namespace TeamScreen.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class IdentityDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
             : base(options)
         {
         }

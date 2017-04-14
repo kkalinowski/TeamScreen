@@ -10,8 +10,10 @@ using TeamScreen.Jira;
 using TeamScreen.Models;
 using TeamScreen.Services;
 using TeamScreen.Services.Jira;
+using TeamScreen.Services.Settings;
 using TeamScreen.Services.TeamCity;
 using TeamScreen.TeamCity;
+using IdentityDbContext = TeamScreen.Data.IdentityDbContext;
 
 namespace TeamScreen
 {
@@ -39,12 +41,13 @@ namespace TeamScreen
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var connString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite(connString)
+            );
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
@@ -56,6 +59,7 @@ namespace TeamScreen
             services.AddSingleton<IBuildMapper, BuildMapper>();
             services.AddSingleton<IJiraService, JiraService>();
             services.AddSingleton<IIssueMapper, IssueMapper>();
+            services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton(Configuration);
         }
 
