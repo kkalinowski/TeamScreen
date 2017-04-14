@@ -5,7 +5,7 @@ namespace TeamScreen.Data
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<PluginSetting> Settings { get; set; }
+        public DbSet<PluginSetting> PluginSettings { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }

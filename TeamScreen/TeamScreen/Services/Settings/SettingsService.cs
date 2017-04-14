@@ -24,7 +24,7 @@ namespace TeamScreen.Services.Settings
 
         public async Task<T> Get<T>(string plugin) where T : ISettings<T>, new()
         {
-            var setting = await _db.Settings.FirstOrDefaultAsync(x => x.Plugin == plugin);
+            var setting = await _db.PluginSettings.FirstOrDefaultAsync(x => x.Plugin == plugin);
             if (setting == null)
                 return new T().WithDefaultValues();
 
@@ -35,11 +35,11 @@ namespace TeamScreen.Services.Settings
         public async Task Set<T>(string plugin, T value) where T : ISettings<T>, new()
         {
             var jsonValue = JsonConvert.SerializeObject(value);
-            var existing = await _db.Settings.FirstOrDefaultAsync(x => x.Plugin == plugin);
+            var existing = await _db.PluginSettings.FirstOrDefaultAsync(x => x.Plugin == plugin);
             if (existing != null)
                 existing.Value = jsonValue;
 
-            await _db.Settings.AddAsync(PluginSetting.Create(plugin, jsonValue));
+            await _db.PluginSettings.AddAsync(PluginSetting.Create(plugin, jsonValue));
             await _db.SaveChangesAsync();
         }
     }
