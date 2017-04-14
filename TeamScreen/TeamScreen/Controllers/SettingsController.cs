@@ -24,5 +24,11 @@ namespace TeamScreen.Controllers
             var coreSettings = await _settingsService.Get<CoreSettings>(Const.CorePluginName);
             return PartialView(coreSettings);
         }
+
+        [HttpPost]
+        public void Save(CoreSettings settings)
+        {
+            _settingsService.Set(Const.CorePluginName, settings);
+        }
     }
 }
