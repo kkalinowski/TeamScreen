@@ -10,6 +10,7 @@ using TeamScreen.Jira;
 using TeamScreen.Models;
 using TeamScreen.Services;
 using TeamScreen.Services.Jira;
+using TeamScreen.Services.Settings;
 using TeamScreen.Services.TeamCity;
 using TeamScreen.TeamCity;
 using IdentityDbContext = TeamScreen.Data.IdentityDbContext;
@@ -58,6 +59,7 @@ namespace TeamScreen
             services.AddSingleton<IBuildMapper, BuildMapper>();
             services.AddSingleton<IJiraService, JiraService>();
             services.AddSingleton<IIssueMapper, IssueMapper>();
+            services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton(Configuration);
         }
 
