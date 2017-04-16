@@ -27,7 +27,7 @@ namespace TeamScreen.Plugin.TeamCity.Controllers
             var builds = await _teamCityService.GetBuilds(url, username, password);
 
             var models = _buildMapper.Map(builds);
-            return PartialView("/Views/TeamCity/Content", models);
+            return PartialView(models);
         }
     }
 }
