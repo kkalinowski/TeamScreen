@@ -62,6 +62,7 @@ namespace TeamScreen
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.FileProviders.Add(embeddedFile);
+                options.ViewLocationExpanders.Add(new PluginViewLocationExpander());
             });
 
             // Add application services.
