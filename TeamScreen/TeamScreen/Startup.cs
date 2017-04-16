@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,11 +10,11 @@ using Microsoft.Extensions.Logging;
 using TeamScreen.Data;
 using TeamScreen.Jira;
 using TeamScreen.Models;
+using TeamScreen.Plugin.TeamCity.Integration;
+using TeamScreen.Plugin.TeamCity.Mapping;
 using TeamScreen.Services;
 using TeamScreen.Services.Jira;
 using TeamScreen.Services.Settings;
-using TeamScreen.Services.TeamCity;
-using TeamScreen.TeamCity;
 using IdentityDbContext = TeamScreen.Data.IdentityDbContext;
 
 namespace TeamScreen
@@ -50,7 +52,15 @@ namespace TeamScreen
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            var teamCityAssembly = typeof(ITeamCityService).GetTypeInfo().Assembly;
+            services.AddMvc()
+                .AddApplicationPart(teamCityAssembly)
+                .AddControllersAsServices();
+
+            //services.Configure<RazorViewEngineOptions>(options =>
+            //{
+            //    options.FileProviders.Add( new );
+            //});
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
-using TeamScreen.TeamCity;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using TeamScreen.Services.TeamCity;
+using TeamScreen.Plugin.TeamCity.Integration;
+using TeamScreen.Plugin.TeamCity.Mapping;
 
-namespace TeamScreen.Controllers
+namespace TeamScreen.Plugin.TeamCity.Controllers
 {
     public class TeamCityController : Controller
     {
@@ -27,7 +27,7 @@ namespace TeamScreen.Controllers
             var builds = await _teamCityService.GetBuilds(url, username, password);
 
             var models = _buildMapper.Map(builds);
-            return PartialView(models);
+            return PartialView("/Views/TeamCity/Content", models);
         }
     }
 }

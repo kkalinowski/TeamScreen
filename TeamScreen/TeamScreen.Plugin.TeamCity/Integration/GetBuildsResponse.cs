@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace TeamScreen.TeamCity
+namespace TeamScreen.Plugin.TeamCity.Integration
 {
     public class GetBuildsResponse
     {

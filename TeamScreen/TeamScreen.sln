@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamScreen.Tests", "TeamScr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamScreen.Plugin.Base", "TeamScreen.Plugin.Base\TeamScreen.Plugin.Base.csproj", "{AD2A9784-4334-413C-ABC4-CF763A4F835E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamScreen.Plugin.TeamCity", "TeamScreen.Plugin.TeamCity\TeamScreen.Plugin.TeamCity.csproj", "{6CD17225-DF64-4BCC-861A-0250786F6E74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{AD2A9784-4334-413C-ABC4-CF763A4F835E}.Release|x64.Build.0 = Release|Any CPU
 		{AD2A9784-4334-413C-ABC4-CF763A4F835E}.Release|x86.ActiveCfg = Release|Any CPU
 		{AD2A9784-4334-413C-ABC4-CF763A4F835E}.Release|x86.Build.0 = Release|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Debug|x64.Build.0 = Debug|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Debug|x86.Build.0 = Debug|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Release|x64.ActiveCfg = Release|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Release|x64.Build.0 = Release|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Release|x86.ActiveCfg = Release|Any CPU
+		{6CD17225-DF64-4BCC-861A-0250786F6E74}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

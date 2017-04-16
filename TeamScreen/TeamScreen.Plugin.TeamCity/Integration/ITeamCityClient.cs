@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using RestEase;
 
-namespace TeamScreen.TeamCity
+namespace TeamScreen.Plugin.TeamCity.Integration
 {
     [Header("Accept", "application/json")]
     public interface ITeamCityClient

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace TeamScreen.TeamCity
+namespace TeamScreen.Plugin.TeamCity.Integration
 {
     public class GetProjectsResponse
     {
