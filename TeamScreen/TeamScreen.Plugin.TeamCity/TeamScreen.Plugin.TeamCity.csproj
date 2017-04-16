@@ -5,10 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Views\TeamCity\Content.cshtml">
+    <EmbeddedResource Include="Views\TeamCity\Content.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
