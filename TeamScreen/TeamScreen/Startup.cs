@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using TeamScreen.Data;
 using TeamScreen.Jira;
@@ -57,10 +58,11 @@ namespace TeamScreen
                 .AddApplicationPart(teamCityAssembly)
                 .AddControllersAsServices();
 
-            //services.Configure<RazorViewEngineOptions>(options =>
-            //{
-            //    options.FileProviders.Add( new );
-            //});
+            var embeddedFile = new EmbeddedFileProvider(teamCityAssembly);
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.FileProviders.Add(embeddedFile);
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
