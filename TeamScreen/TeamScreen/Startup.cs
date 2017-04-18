@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using TeamScreen.Data;
 using TeamScreen.Jira;
 using TeamScreen.Models;
+using TeamScreen.Plugin.TeamCity;
 using TeamScreen.Plugin.TeamCity.Integration;
 using TeamScreen.Plugin.TeamCity.Mapping;
 using TeamScreen.Services.Jira;
@@ -70,12 +71,12 @@ namespace TeamScreen
 
             // Add application services.
             var builder = new ContainerBuilder();
-            builder.RegisterType<TeamCityService>().As<ITeamCityService>();
-            builder.RegisterType<BuildMapper>().As<IBuildMapper>();
             builder.RegisterType<JiraService>().As<IJiraService>();
             builder.RegisterType<IssueMapper>().As<IIssueMapper>();
             builder.RegisterType<SettingsService>().As<ISettingsService>();
             builder.RegisterInstance(Configuration);
+            builder.RegisterModule<TeamCityModule>();
+
             builder.Populate(services);
             this.ApplicationContainer = builder.Build();
 
