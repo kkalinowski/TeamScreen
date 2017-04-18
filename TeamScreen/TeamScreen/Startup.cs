@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -13,7 +16,6 @@ using TeamScreen.Jira;
 using TeamScreen.Models;
 using TeamScreen.Plugin.TeamCity.Integration;
 using TeamScreen.Plugin.TeamCity.Mapping;
-using TeamScreen.Services;
 using TeamScreen.Services.Jira;
 using TeamScreen.Services.Settings;
 using IdentityDbContext = TeamScreen.Data.IdentityDbContext;
@@ -22,6 +24,9 @@ namespace TeamScreen
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+        public IContainer ApplicationContainer { get; private set; }
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -39,10 +44,8 @@ namespace TeamScreen
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             var connString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(options =>
@@ -66,18 +69,22 @@ namespace TeamScreen
             });
 
             // Add application services.
-            services.AddTransient<IEmailSender, AuthMessageSender>();
-            services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddSingleton<ITeamCityService, TeamCityService>();
-            services.AddSingleton<IBuildMapper, BuildMapper>();
-            services.AddSingleton<IJiraService, JiraService>();
-            services.AddSingleton<IIssueMapper, IssueMapper>();
-            services.AddSingleton<ISettingsService, SettingsService>();
-            services.AddSingleton(Configuration);
+            var builder = new ContainerBuilder();
+            builder.RegisterType<TeamCityService>().As<ITeamCityService>();
+            builder.RegisterType<BuildMapper>().As<IBuildMapper>();
+            builder.RegisterType<JiraService>().As<IJiraService>();
+            builder.RegisterType<IssueMapper>().As<IIssueMapper>();
+            builder.RegisterType<SettingsService>().As<ISettingsService>();
+            builder.RegisterInstance(Configuration);
+            builder.Populate(services);
+            this.ApplicationContainer = builder.Build();
+
+            // Create the IServiceProvider based on the container.
+            return new AutofacServiceProvider(this.ApplicationContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -108,6 +115,7 @@ namespace TeamScreen
                     name: "default",
                     template: "{controller=Container}/{action=Index}/{id?}");
             });
+            appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
         }
     }
 }
