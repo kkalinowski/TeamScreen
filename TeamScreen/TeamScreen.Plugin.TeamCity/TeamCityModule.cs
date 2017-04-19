@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using TeamScreen.Plugin.Base;
 using TeamScreen.Plugin.TeamCity.Integration;
 using TeamScreen.Plugin.TeamCity.Mapping;
 
@@ -12,6 +13,7 @@ namespace TeamScreen.Plugin.TeamCity
             {
                 builder.RegisterType<TeamCityService>().As<ITeamCityService>();
                 builder.RegisterType<BuildMapper>().As<IBuildMapper>();
+                builder.RegisterType<TeamCityPlugin>().As<IPlugin>();
         }
     }
 }

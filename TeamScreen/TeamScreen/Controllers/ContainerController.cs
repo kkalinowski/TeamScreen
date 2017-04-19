@@ -25,7 +25,7 @@ namespace TeamScreen.Controllers
 
         public IActionResult GetUsedPluginsUrls()
         {
-            return Json(_pluginService.GetUsedPluginsUrls());
+            return Json(_pluginService.GetUsedPluginsUrls(Url));
         }
     }
 }

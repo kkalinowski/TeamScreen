@@ -1,19 +1,33 @@
-﻿namespace TeamScreen.Services.Plugins
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using TeamScreen.Plugin.Base;
+
+namespace TeamScreen.Services.Plugins
 {
     public interface IPluginService
     {
-        string[] GetPluginSettingsUrls();
-        string[] GetUsedPluginsUrls();
+        string[] GetPluginSettingsUrls(IUrlHelper urlHelper);
+        string[] GetUsedPluginsUrls(IUrlHelper urlHelper);
     }
 
     public class PluginService : IPluginService
     {
-        public string[] GetUsedPluginsUrls()
+        private readonly IEnumerable<IPlugin> _plugins;
+
+        public PluginService(IEnumerable<IPlugin> plugins)
         {
-            return new string[0];
+            this._plugins = plugins;
         }
 
-        public string[] GetPluginSettingsUrls()
+        public string[] GetUsedPluginsUrls(IUrlHelper urlHelper)
+        {
+            return _plugins
+                .Select(x => x.GetContentUrl(urlHelper))
+                .ToArray();
+        }
+
+        public string[] GetPluginSettingsUrls(IUrlHelper urlHelper)
         {
             return new string[0];
         }

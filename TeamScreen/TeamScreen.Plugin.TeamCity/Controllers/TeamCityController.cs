@@ -1,13 +1,12 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using TeamScreen.Plugin.Base;
 using TeamScreen.Plugin.TeamCity.Integration;
 using TeamScreen.Plugin.TeamCity.Mapping;
 
 namespace TeamScreen.Plugin.TeamCity.Controllers
 {
-    public class TeamCityController : PluginControllerBase
+    public class TeamCityController : Controller
     {
         private readonly ITeamCityService _teamCityService;
         private readonly IBuildMapper _buildMapper;
@@ -20,9 +19,7 @@ namespace TeamScreen.Plugin.TeamCity.Controllers
             _buildMapper = buildMapper;
         }
 
-        public override string Name { get; } = "TeamCity";
-
-        public override async Task<PartialViewResult> Content()
+        public async Task<PartialViewResult> Content()
         {
             var url = _configurationRoot["TeamCityUrl"];
             var username = _configurationRoot["TeamCityUsername"];
