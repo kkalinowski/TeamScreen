@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TeamScreen.Plugin.Base\TeamScreen.Plugin.Base.csproj" />
-    <ProjectReference Include="..\TeamScreen.Plugin.TeamCity\TeamScreen.Plugin.TeamCity.csproj" />
   </ItemGroup>
 
 </Project>

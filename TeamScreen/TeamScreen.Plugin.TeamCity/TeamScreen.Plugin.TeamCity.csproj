@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <PostBuildEvent>xcopy /y $(OutDir)TeamScreen.Plugin.TeamCity.dll  $(SolutionDir)TeamScreen\bin\Debug\netcoreapp1.1</PostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Views\TeamCity\Content.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 

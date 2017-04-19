@@ -19,7 +19,6 @@ using TeamScreen.Data;
 using TeamScreen.Jira;
 using TeamScreen.Models;
 using TeamScreen.Plugin.Base.Extensions;
-using TeamScreen.Plugin.TeamCity;
 using TeamScreen.Services.Jira;
 using TeamScreen.Services.Settings;
 using IdentityDbContext = TeamScreen.Data.IdentityDbContext;
@@ -101,8 +100,7 @@ namespace TeamScreen
         {
             return Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "TeamScreen.Plugin.*.dll", SearchOption.AllDirectories)
                 .Where(x => !x.Contains("TeamScreen.Plugin.Base.dll"))
-                .Select(AssemblyLoadContext.GetAssemblyName)
-                .Select(Assembly.Load)
+                .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
                 .ToArray();
         }
 
