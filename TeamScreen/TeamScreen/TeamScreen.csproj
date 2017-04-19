@@ -50,6 +50,7 @@
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0-msbuild3-final" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Services\Plugins\" />
     <Folder Include="Services\Settings\" />
     <Folder Include="Views\Container\" />
   </ItemGroup>
