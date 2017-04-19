@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
+using System.Text.RegularExpressions;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -14,6 +19,7 @@ using Microsoft.Extensions.Logging;
 using TeamScreen.Data;
 using TeamScreen.Jira;
 using TeamScreen.Models;
+using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Plugin.TeamCity;
 using TeamScreen.Plugin.TeamCity.Integration;
 using TeamScreen.Plugin.TeamCity.Mapping;
@@ -57,19 +63,10 @@ namespace TeamScreen
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
-            var teamCityAssembly = typeof(ITeamCityService).GetTypeInfo().Assembly;
-            services.AddMvc()
-                .AddApplicationPart(teamCityAssembly)
-                .AddControllersAsServices();
+            var pluginAssemblies = GetPluginAssemblies();
+            RegisterMvc(services, pluginAssemblies);
+            SetupEmbeddedViewsForPlugins(services, pluginAssemblies);
 
-            var embeddedFile = new EmbeddedFileProvider(teamCityAssembly);
-            services.Configure<RazorViewEngineOptions>(options =>
-            {
-                options.FileProviders.Add(embeddedFile);
-                //options.ViewLocationExpanders.Add(new PluginViewLocationExpander());
-            });
-
-            // Add application services.
             var builder = new ContainerBuilder();
             builder.RegisterType<JiraService>().As<IJiraService>();
             builder.RegisterType<IssueMapper>().As<IIssueMapper>();
@@ -82,6 +79,31 @@ namespace TeamScreen
 
             // Create the IServiceProvider based on the container.
             return new AutofacServiceProvider(this.ApplicationContainer);
+        }
+
+        private void SetupEmbeddedViewsForPlugins(IServiceCollection services, IEnumerable<Assembly> pluginAssemblies)
+        {
+            foreach (var assembly in pluginAssemblies)
+            {
+                var embeddedFile = new EmbeddedFileProvider(assembly);
+                services.Configure<RazorViewEngineOptions>(options => { options.FileProviders.Add(embeddedFile); });
+            }
+        }
+
+        private void RegisterMvc(IServiceCollection services, IEnumerable<Assembly> pluginAssemblies)
+        {
+            var mvcBuilder = services.AddMvc();
+            pluginAssemblies.ForEach(x => mvcBuilder.AddApplicationPart(x));
+            mvcBuilder.AddControllersAsServices();
+        }
+
+        private Assembly[] GetPluginAssemblies()
+        {
+            return Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "TeamScreen.Plugin.*.dll", SearchOption.AllDirectories)
+                .Where(x => !x.Contains("TeamScreen.Plugin.Base.dll"))
+                .Select(AssemblyLoadContext.GetAssemblyName)
+                .Select(Assembly.Load)
+                .ToArray();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
