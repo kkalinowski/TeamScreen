@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using System.Text.RegularExpressions;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -21,8 +20,6 @@ using TeamScreen.Jira;
 using TeamScreen.Models;
 using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Plugin.TeamCity;
-using TeamScreen.Plugin.TeamCity.Integration;
-using TeamScreen.Plugin.TeamCity.Mapping;
 using TeamScreen.Services.Jira;
 using TeamScreen.Services.Settings;
 using IdentityDbContext = TeamScreen.Data.IdentityDbContext;
@@ -72,7 +69,7 @@ namespace TeamScreen
             builder.RegisterType<IssueMapper>().As<IIssueMapper>();
             builder.RegisterType<SettingsService>().As<ISettingsService>();
             builder.RegisterInstance(Configuration);
-            builder.RegisterModule<TeamCityModule>();
+            builder.RegisterAssemblyModules(pluginAssemblies);
 
             builder.Populate(services);
             this.ApplicationContainer = builder.Build();
@@ -83,11 +80,14 @@ namespace TeamScreen
 
         private void SetupEmbeddedViewsForPlugins(IServiceCollection services, IEnumerable<Assembly> pluginAssemblies)
         {
-            foreach (var assembly in pluginAssemblies)
+            services.Configure<RazorViewEngineOptions>(options =>
             {
-                var embeddedFile = new EmbeddedFileProvider(assembly);
-                services.Configure<RazorViewEngineOptions>(options => { options.FileProviders.Add(embeddedFile); });
-            }
+                foreach (var assembly in pluginAssemblies)
+                {
+                    var embeddedFile = new EmbeddedFileProvider(assembly);
+                    options.FileProviders.Add(embeddedFile);
+                }
+            });
         }
 
         private void RegisterMvc(IServiceCollection services, IEnumerable<Assembly> pluginAssemblies)
