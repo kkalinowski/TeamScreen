@@ -22,10 +22,5 @@ namespace TeamScreen.Controllers
             var settings = await _settingsService.Get<CoreSettings>(Const.CorePluginName);
             return View(settings);
         }
-
-        public IActionResult GetUsedPluginsUrls()
-        {
-            return Json(_pluginService.GetUsedPluginsUrls(Url));
-        }
     }
 }

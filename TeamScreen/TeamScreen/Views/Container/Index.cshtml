@@ -20,7 +20,7 @@
             el: "#app",
             data: {
                 index: 0,
-                availablePlugins: ['@Url.Action("Content", "Jira")', '@Url.Action("Content", "TeamCity")'],
+                availablePlugins: [],
                 interval: @Model.Interval,
                 paused: false,
                 timer: 0,
@@ -71,7 +71,7 @@
             },
 
             mounted: function () {
-                this.$http.get('@Url.Action("GetUsedPluginsUrls")').then(function(response) {
+                this.$http.get('@Url.Action("GetUsedPluginsUrls", "Plugin")').then(function(response) {
                     this.availablePlugins = response.body;
                 }, function(response) {
                     alert("Error during retrieving list of used plugins");

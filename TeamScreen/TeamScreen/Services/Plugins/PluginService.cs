@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using TeamScreen.Models.Settings;
 using TeamScreen.Plugin.Base;
 
 namespace TeamScreen.Services.Plugins
 {
     public interface IPluginService
     {
-        string[] GetPluginSettingsUrls(IUrlHelper urlHelper);
         string[] GetUsedPluginsUrls(IUrlHelper urlHelper);
+        PluginSettingsEndpoint[] GetPluginSettingsUrls(IUrlHelper urlHelper);
     }
 
     public class PluginService : IPluginService
@@ -27,9 +28,11 @@ namespace TeamScreen.Services.Plugins
                 .ToArray();
         }
 
-        public string[] GetPluginSettingsUrls(IUrlHelper urlHelper)
+        public PluginSettingsEndpoint[] GetPluginSettingsUrls(IUrlHelper urlHelper)
         {
-            return new string[0];
+            return _plugins
+                .Select(x => new PluginSettingsEndpoint(x.Name, x.GetSettingsUrl(urlHelper)))
+                .ToArray();
         }
     }
 }
