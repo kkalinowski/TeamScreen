@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <PostBuildEvent>xcopy /y $(OutDir)TeamScreen.Plugin.TeamCity.dll  $(SolutionDir)TeamScreen\bin\Debug\netcoreapp1.1</PostBuildEvent>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>

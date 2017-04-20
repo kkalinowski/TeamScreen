@@ -70,7 +70,12 @@
                 },
             },
 
-            mounted: function() {
+            mounted: function () {
+                this.$http.get('@Url.Action("GetUsedPluginsUrls")').then(function(response) {
+                    this.availablePlugins = response.body;
+                }, function(response) {
+                    alert("Error during retrieving list of used plugins");
+                });
                 this.loadNextPlugin();
 
                 $(document).keydown(this.handleKeyboard);

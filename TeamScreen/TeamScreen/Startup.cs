@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using TeamScreen.Data;
 using TeamScreen.Jira;
 using TeamScreen.Models;
+using TeamScreen.Plugin.Base;
 using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Services.Jira;
 using TeamScreen.Services.Plugins;
@@ -69,6 +70,7 @@ namespace TeamScreen
             builder.RegisterType<IssueMapper>().As<IIssueMapper>();
             builder.RegisterType<SettingsService>().As<ISettingsService>();
             builder.RegisterType<PluginService>().As<IPluginService>();
+            builder.RegisterType<JiraPlugin>().As<IPlugin>().PreserveExistingDefaults();
             builder.RegisterInstance(Configuration);
             builder.RegisterAssemblyModules(pluginAssemblies);
 
