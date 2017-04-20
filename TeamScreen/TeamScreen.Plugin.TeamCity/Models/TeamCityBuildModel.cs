@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TeamScreen.Plugin.TeamCity.Mapping
+namespace TeamScreen.Plugin.TeamCity.Models
 {
     public class TeamCityBuildModel
     {

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using TeamScreen.Plugin.TeamCity.Integration;
 using TeamScreen.Plugin.TeamCity.Mapping;
+using TeamScreen.Plugin.TeamCity.Models;
 
 namespace TeamScreen.Plugin.TeamCity.Controllers
 {
@@ -28,6 +29,13 @@ namespace TeamScreen.Plugin.TeamCity.Controllers
 
             var models = _buildMapper.Map(builds);
             return PartialView(models);
+        }
+
+        public PartialViewResult Settings()
+        {
+
+            var model = new TeamCitySettings();
+            return PartialView(model);
         }
     }
 }

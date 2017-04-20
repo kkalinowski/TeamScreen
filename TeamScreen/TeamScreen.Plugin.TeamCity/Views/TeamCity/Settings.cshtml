@@ -1,0 +1,9 @@
+﻿@model TeamScreen.Plugin.TeamCity.Models.TeamCitySettings
+
+<form asp-controller="Settings" asp-action="Save" method="post">
+    <div class="form-group">
+        <label for="url">TeamCity Url</label>
+        <input type="number" class="form-control" id="url" asp-for="Url" min="5">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>

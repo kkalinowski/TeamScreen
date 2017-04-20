@@ -12,5 +12,10 @@ namespace TeamScreen.Plugin.TeamCity
         {
             return urlHelper.Action(nameof(TeamCityController.Content), nameof(TeamCityController));
         }
+
+        public string GetSettingsUrl(IUrlHelper urlHelper)
+        {
+            return urlHelper.Action(nameof(TeamCityController.Settings), nameof(TeamCityController));
+        }
     }
 }

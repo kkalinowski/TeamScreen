@@ -4,6 +4,7 @@ using Xunit;
 using Shouldly;
 using TeamScreen.Plugin.TeamCity.Integration;
 using TeamScreen.Plugin.TeamCity.Mapping;
+using TeamScreen.Plugin.TeamCity.Models;
 
 namespace TeamScreen.Tests
 {

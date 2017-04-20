@@ -2,6 +2,7 @@
 using System.Linq;
 using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Plugin.TeamCity.Integration;
+using TeamScreen.Plugin.TeamCity.Models;
 
 namespace TeamScreen.Plugin.TeamCity.Mapping
 {
