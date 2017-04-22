@@ -6,49 +6,33 @@
     </ul>
 
     <div class="tab-content">
-        <div v-for="endpoint in settingsEndpoints" id="{{endpoint.pluginName}}" class="tab-pane fade">
+        <div v-for="endpoint in settingsEndpoints" v-bind:id="endpoint.pluginName" class="tab-pane fade">
             
         </div>
-        @*<div id="core" class="tab-pane fade in active">
-
-        </div>
-        <div id="menu1" class="tab-pane fade">
-            <h3>Menu 1</h3>
-            <p>Some content in menu 1.</p>
-        </div>
-        <div id="menu2" class="tab-pane fade">
-            <h3>Menu 2</h3>
-            <p>Some content in menu 2.</p>
-        </div>*@
     </div>
 </div>
 
 @section Scripts{
     <script type="text/javascript">
-        @*$.getJSON('@Url.Action("GetPluginsEndpoints","Plugin")',
-            function(data) {
-                $.each(data, function(endpoint) {
-                    
-                });
-            });
-        $("#core").load('@Url.Action("CoreSettings")');*@
-
         var vm = new Vue({
             el: "#app",
             data: {
                 settingsEndpoints: []
             },
-            created: function() {
-                this.$http.get('@Url.Action("GetPluginsEndpoints","Plugin")').then(function(response) {
-                    this.settingsEndpoints = response.body;
-                });
+            methods: {
+                loadSettingsContent: function () {
+                    for (var i = 0; i < this.settingsEndpoints.length; i++) {
+                        $("#" + this.settingsEndpoints[i].pluginName).load(this.settingsEndpoints[i].settingsUrl);
+                    }
+                    $(".tab-pane").first().addClass("active in");
+                }
             },
             mounted: function() {
-                $.each(this.settingsEndpoints, function(endpoint) {
-                    $("#" + endpoint.pluginName).load(endpoint.settingsUrl);
+                this.$http.get('@Url.Action("GetPluginsEndpoints","Plugin")').then(function(response) {
+                    this.settingsEndpoints = response.body;
+                    setTimeout(this.loadSettingsContent, 0);
                 });
-                $(".tab-pane").first().addClass("active");
-            }
+            },
         });
     </script>
 }
