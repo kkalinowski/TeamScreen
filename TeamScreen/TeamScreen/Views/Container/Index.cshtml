@@ -73,13 +73,14 @@
             mounted: function () {
                 this.$http.get('@Url.Action("GetUsedPluginsUrls", "Plugin")').then(function(response) {
                     this.availablePlugins = response.body;
+
+                    this.loadNextPlugin();
+                    setInterval(this.tick, 1000);
                 }, function(response) {
                     alert("Error during retrieving list of used plugins");
                 });
-                this.loadNextPlugin();
 
                 $(document).keydown(this.handleKeyboard);
-                setInterval(this.tick, 1000);
             }
         });
     </script>

@@ -10,12 +10,12 @@ namespace TeamScreen
 
         public string GetContentUrl(IUrlHelper urlHelper)
         {
-            return urlHelper.Action(nameof(JiraController.Content), nameof(JiraController));
+            return urlHelper.Action(nameof(JiraController.Content), "Jira");
         }
 
         public string GetSettingsUrl(IUrlHelper urlHelper)
         {
-            return urlHelper.Action(nameof(SettingsController.CoreSettings), nameof(SettingsController));
+            return urlHelper.Action(nameof(SettingsController.CoreSettings), "Settings");
         }
     }
 }

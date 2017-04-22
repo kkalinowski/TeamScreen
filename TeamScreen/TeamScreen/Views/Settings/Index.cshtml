@@ -25,18 +25,29 @@
 
 @section Scripts{
     <script type="text/javascript">
-        $("#core").load('@Url.Action("CoreSettings")');
+        @*$.getJSON('@Url.Action("GetPluginsEndpoints","Plugin")',
+            function(data) {
+                $.each(data, function(endpoint) {
+                    
+                });
+            });
+        $("#core").load('@Url.Action("CoreSettings")');*@
 
         var vm = new Vue({
             el: "#app",
             data: {
                 settingsEndpoints: []
             },
-            mounted: function() {
+            created: function() {
                 this.$http.get('@Url.Action("GetPluginsEndpoints","Plugin")').then(function(response) {
                     this.settingsEndpoints = response.body;
-                    //$.each(this.settingsEndpoints, function)
                 });
+            },
+            mounted: function() {
+                $.each(this.settingsEndpoints, function(endpoint) {
+                    $("#" + endpoint.pluginName).load(endpoint.settingsUrl);
+                });
+                $(".tab-pane").first().addClass("active");
             }
         });
     </script>
