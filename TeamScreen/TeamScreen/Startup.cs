@@ -76,8 +76,6 @@ namespace TeamScreen
 
             builder.Populate(services);
             this.ApplicationContainer = builder.Build();
-
-            // Create the IServiceProvider based on the container.
             return new AutofacServiceProvider(this.ApplicationContainer);
         }
 
