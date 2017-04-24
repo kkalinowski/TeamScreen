@@ -33,7 +33,6 @@ namespace TeamScreen.Plugin.TeamCity.Controllers
 
         public PartialViewResult Settings()
         {
-
             var model = new TeamCitySettings();
             return PartialView(model);
         }

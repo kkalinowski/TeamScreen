@@ -1,0 +1,9 @@
+﻿@model TeamScreen.Plugin.Jira.Models.JiraSettings
+
+<form asp-controller="Settings" asp-action="Save" method="post">
+    <div class="form-group">
+        <label for="url">JIRA Url</label>
+        <input type="number" class="form-control" id="url" asp-for="Url" min="5">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>

@@ -1,4 +1,4 @@
-﻿namespace TeamScreen.Jira
+﻿namespace TeamScreen.Plugin.Jira.Integration
 {
     public class GetBoardConfigurationResponse
     {

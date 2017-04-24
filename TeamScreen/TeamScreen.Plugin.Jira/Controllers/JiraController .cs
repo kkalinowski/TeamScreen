@@ -1,10 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TeamScreen.Plugin.Jira.Integration;
+using TeamScreen.Plugin.Jira.Mapping;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using TeamScreen.Jira;
-using TeamScreen.Services.Jira;
+using TeamScreen.Plugin.Jira.Models;
 
-namespace TeamScreen.Controllers
+namespace TeamScreen.Plugin.Jira.Controllers
 {
     public class JiraController : Controller
     {
@@ -32,6 +33,10 @@ namespace TeamScreen.Controllers
             return PartialView(models);
         }
 
-
+        public PartialViewResult Settings()
+        {
+            var model = new JiraSettings();
+            return PartialView(model);
+        }
     }
 }

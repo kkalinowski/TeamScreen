@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TeamScreen.Plugin.Jira\TeamScreen.Plugin.Jira.csproj" />
     <ProjectReference Include="..\TeamScreen.Plugin.TeamCity\TeamScreen.Plugin.TeamCity.csproj" />
-    <ProjectReference Include="..\TeamScreen\TeamScreen.csproj" />
   </ItemGroup>
 
   <ItemGroup>

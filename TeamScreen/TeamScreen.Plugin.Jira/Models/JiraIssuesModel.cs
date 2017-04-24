@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TeamScreen.Jira;
+using TeamScreen.Plugin.Jira.Integration;
 
-namespace TeamScreen.Models.Jira
+namespace TeamScreen.Plugin.Jira.Models
 {
     public class JiraIssuesModel
     {

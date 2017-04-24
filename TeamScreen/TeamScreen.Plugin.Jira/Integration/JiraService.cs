@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RestEase;
 
-namespace TeamScreen.Jira
+namespace TeamScreen.Plugin.Jira.Integration
 {
     public interface IJiraService
     {

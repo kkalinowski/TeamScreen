@@ -2,12 +2,31 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <PostBuildEvent>xcopy /y TeamScreen.Plugin.Jira.dll  C:\Users\sa_krzysztof.kalinow\Documents\TeamScreen\TeamScreen\TeamScreen\bin\Debug\netcoreapp1.1</PostBuildEvent>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Jira\Content.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Jira\Settings.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="RestEase" Version="1.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TeamScreen.Plugin.Base\TeamScreen.Plugin.Base.csproj" />
   </ItemGroup>
 
 </Project>

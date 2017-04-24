@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TeamScreen.Controllers;
-using TeamScreen.Plugin.Base;
+﻿using TeamScreen.Plugin.Jira.Controllers;
 
-namespace TeamScreen
+namespace TeamScreen.Plugin.Jira
 {
     public class JiraPlugin : IPlugin
     {
@@ -15,7 +13,7 @@ namespace TeamScreen
 
         public string GetSettingsUrl(IUrlHelper urlHelper)
         {
-            return urlHelper.Action(nameof(SettingsController.CoreSettings), "Settings");
+            return urlHelper.Action(nameof(JiraController.Settings), "Jira");
         }
     }
 }

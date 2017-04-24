@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace TeamScreen.Jira
+namespace TeamScreen.Plugin.Jira.Integration
 {
     public class GetActiveSprintResponse
     {

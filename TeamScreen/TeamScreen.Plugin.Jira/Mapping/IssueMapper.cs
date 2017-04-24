@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore.Internal;
-using TeamScreen.Jira;
-using TeamScreen.Models.Jira;
+using TeamScreen.Plugin.Jira.Integration;
+using TeamScreen.Plugin.Jira.Models;
 
-namespace TeamScreen.Services.Jira
+namespace TeamScreen.Plugin.Jira.Mapping
 {
     public interface IIssueMapper
     {
