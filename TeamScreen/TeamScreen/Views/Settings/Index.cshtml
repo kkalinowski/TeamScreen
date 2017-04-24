@@ -1,6 +1,6 @@
 <h1>Settings</h1>
 
-<div id="app">
+<div id="appSettings">
     <ul class="nav nav-tabs">
         <li v-for="endpoint in settingsEndpoints"><a v-bind:href="'#' + endpoint.pluginName" v-on:click="loadSettings(endpoint.settingsUrl)">{{endpoint.pluginName}}</a></li>
     </ul>
@@ -12,8 +12,8 @@
 
 @section Scripts{
     <script type="text/javascript">
-        var vm = new Vue({
-            el: "#app",
+        var settingsVM = new Vue({
+            el: "#appSettings",
             data: {
                 settingsEndpoints: []
             },

@@ -19,10 +19,15 @@ namespace TeamScreen.Controllers
             return View();
         }
 
-        public async Task<PartialViewResult> CoreSettings()
+        public PartialViewResult CoreSettings()
+        {
+            return PartialView();
+        }
+
+        public async Task<JsonResult> GetCoreSettings()
         {
             var coreSettings = await _settingsService.Get<CoreSettings>(Const.CorePluginName);
-            return PartialView(coreSettings);
+            return Json(coreSettings);
         }
 
         [HttpPost]
