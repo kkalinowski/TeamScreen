@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Shouldly;
-using TeamScreen.Jira;
-using TeamScreen.Services.Jira;
+using TeamScreen.Plugin.Jira.Integration;
+using TeamScreen.Plugin.Jira.Mapping;
 using Xunit;
 
 namespace TeamScreen.Tests

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using TeamScreen.Plugin.Base;
 using TeamScreen.Plugin.Jira.Integration;
 using TeamScreen.Plugin.Jira.Mapping;
 

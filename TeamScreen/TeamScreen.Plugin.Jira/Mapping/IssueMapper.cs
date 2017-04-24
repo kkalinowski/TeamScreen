@@ -21,7 +21,7 @@ namespace TeamScreen.Plugin.Jira.Mapping
                 modelDict[issue.Fields.Status.Id].Issues.Add(issue);
 
             return modelDict.Values
-                .Distinct((x, y) => x.Column == y.Column)
+                .Distinct(new JiraColumnEqualityComparer())
                 .ToArray();
         }
 

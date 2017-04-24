@@ -1,4 +1,6 @@
-﻿using TeamScreen.Plugin.Jira.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
+using TeamScreen.Plugin.Base;
+using TeamScreen.Plugin.Jira.Controllers;
 
 namespace TeamScreen.Plugin.Jira
 {
