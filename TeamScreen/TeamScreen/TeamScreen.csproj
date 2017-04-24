@@ -16,12 +16,20 @@
   <ItemGroup>
     <Compile Remove="wwwroot\images\**" />
     <Compile Remove="wwwroot\js\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\**" />
     <Content Remove="wwwroot\images\**" />
     <Content Remove="wwwroot\js\**" />
+    <Content Remove="wwwroot\lib\bootstrap\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="wwwroot\js\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\**" />
     <None Remove="wwwroot\images\**" />
     <None Remove="wwwroot\js\**" />
+    <None Remove="wwwroot\lib\bootstrap\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\css\bootstrap.min.css" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.5.0" />
