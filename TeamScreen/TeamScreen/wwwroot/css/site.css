@@ -78,10 +78,7 @@ textarea {
 }
 
 .issue {
-    border: 1px solid gray;
-    padding: 0.3em;
     height: 7em;
-    border-radius: 0.3em;
 }
 
 .controls {
@@ -96,6 +93,6 @@ textarea {
 }
 
 .settings-button {
-    color: black;
+    color: #ebebeb;
     margin-left: 0.1em;
 }
