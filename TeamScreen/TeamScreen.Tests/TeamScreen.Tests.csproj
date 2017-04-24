@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TeamScreen.Plugin.TeamCity\TeamScreen.Plugin.TeamCity.csproj" />
     <ProjectReference Include="..\TeamScreen\TeamScreen.csproj" />
   </ItemGroup>
 

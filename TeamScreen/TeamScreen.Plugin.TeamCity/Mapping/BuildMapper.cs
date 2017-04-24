@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using lib12.Collections;
-using TeamScreen.Models.TeamCity;
-using TeamScreen.TeamCity;
+using TeamScreen.Plugin.Base.Extensions;
+using TeamScreen.Plugin.TeamCity.Integration;
+using TeamScreen.Plugin.TeamCity.Models;
 
-namespace TeamScreen.Services.TeamCity
+namespace TeamScreen.Plugin.TeamCity.Mapping
 {
     public interface IBuildMapper
     {

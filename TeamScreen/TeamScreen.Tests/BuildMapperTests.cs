@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using TeamScreen.Services.TeamCity;
 using Xunit;
 using Shouldly;
-using TeamScreen.Models.TeamCity;
-using TeamScreen.TeamCity;
+using TeamScreen.Plugin.TeamCity.Integration;
+using TeamScreen.Plugin.TeamCity.Mapping;
+using TeamScreen.Plugin.TeamCity.Models;
 
 namespace TeamScreen.Tests
 {

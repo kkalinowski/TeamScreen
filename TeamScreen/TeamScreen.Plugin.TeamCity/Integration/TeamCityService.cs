@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RestEase;
 
-namespace TeamScreen.TeamCity
+namespace TeamScreen.Plugin.TeamCity.Integration
 {
     public interface ITeamCityService
     {

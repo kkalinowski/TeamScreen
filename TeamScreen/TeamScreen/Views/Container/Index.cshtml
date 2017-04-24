@@ -20,7 +20,7 @@
             el: "#app",
             data: {
                 index: 0,
-                availablePlugins: ['@Url.Action("Content", "Jira")', '@Url.Action("Content", "TeamCity")'],
+                availablePlugins: [],
                 interval: @Model.Interval,
                 paused: false,
                 timer: 0,
@@ -70,11 +70,17 @@
                 },
             },
 
-            mounted: function() {
-                this.loadNextPlugin();
+            mounted: function () {
+                this.$http.get('@Url.Action("GetUsedPluginsUrls", "Plugin")').then(function(response) {
+                    this.availablePlugins = response.body;
+
+                    this.loadNextPlugin();
+                    setInterval(this.tick, 1000);
+                }, function(response) {
+                    alert("Error during retrieving list of used plugins");
+                });
 
                 $(document).keydown(this.handleKeyboard);
-                setInterval(this.tick, 1000);
             }
         });
     </script>

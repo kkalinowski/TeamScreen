@@ -2,7 +2,7 @@
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace TeamScreen.TeamCity
+namespace TeamScreen.Plugin.TeamCity.Integration
 {
     public class TeamCityDateConverter : JsonConverter
     {

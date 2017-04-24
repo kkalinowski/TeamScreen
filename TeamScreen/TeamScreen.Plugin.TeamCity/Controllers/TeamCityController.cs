@@ -1,10 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using TeamScreen.TeamCity;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using TeamScreen.Services.TeamCity;
+using TeamScreen.Plugin.TeamCity.Integration;
+using TeamScreen.Plugin.TeamCity.Mapping;
+using TeamScreen.Plugin.TeamCity.Models;
 
-namespace TeamScreen.Controllers
+namespace TeamScreen.Plugin.TeamCity.Controllers
 {
     public class TeamCityController : Controller
     {
@@ -28,6 +29,13 @@ namespace TeamScreen.Controllers
 
             var models = _buildMapper.Map(builds);
             return PartialView(models);
+        }
+
+        public PartialViewResult Settings()
+        {
+
+            var model = new TeamCitySettings();
+            return PartialView(model);
         }
     }
 }

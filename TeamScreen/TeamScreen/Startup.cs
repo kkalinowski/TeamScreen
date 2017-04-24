@@ -1,24 +1,37 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Loader;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using TeamScreen.Data;
 using TeamScreen.Jira;
 using TeamScreen.Models;
-using TeamScreen.Services;
+using TeamScreen.Plugin.Base;
+using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Services.Jira;
+using TeamScreen.Services.Plugins;
 using TeamScreen.Services.Settings;
-using TeamScreen.Services.TeamCity;
-using TeamScreen.TeamCity;
 using IdentityDbContext = TeamScreen.Data.IdentityDbContext;
 
 namespace TeamScreen
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+        public IContainer ApplicationContainer { get; private set; }
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -36,10 +49,8 @@ namespace TeamScreen
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             var connString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(options =>
@@ -50,21 +61,53 @@ namespace TeamScreen
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            var pluginAssemblies = GetPluginAssemblies();
+            RegisterMvc(services, pluginAssemblies);
+            SetupEmbeddedViewsForPlugins(services, pluginAssemblies);
 
-            // Add application services.
-            services.AddTransient<IEmailSender, AuthMessageSender>();
-            services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddSingleton<ITeamCityService, TeamCityService>();
-            services.AddSingleton<IBuildMapper, BuildMapper>();
-            services.AddSingleton<IJiraService, JiraService>();
-            services.AddSingleton<IIssueMapper, IssueMapper>();
-            services.AddSingleton<ISettingsService, SettingsService>();
-            services.AddSingleton(Configuration);
+            var builder = new ContainerBuilder();
+            builder.RegisterType<JiraService>().As<IJiraService>();
+            builder.RegisterType<IssueMapper>().As<IIssueMapper>();
+            builder.RegisterType<SettingsService>().As<ISettingsService>();
+            builder.RegisterType<PluginService>().As<IPluginService>();
+            builder.RegisterType<JiraPlugin>().As<IPlugin>().PreserveExistingDefaults();
+            builder.RegisterInstance(Configuration);
+            builder.RegisterAssemblyModules(pluginAssemblies);
+
+            builder.Populate(services);
+            this.ApplicationContainer = builder.Build();
+            return new AutofacServiceProvider(this.ApplicationContainer);
+        }
+
+        private void SetupEmbeddedViewsForPlugins(IServiceCollection services, IEnumerable<Assembly> pluginAssemblies)
+        {
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                foreach (var assembly in pluginAssemblies)
+                {
+                    var embeddedFile = new EmbeddedFileProvider(assembly);
+                    options.FileProviders.Add(embeddedFile);
+                }
+            });
+        }
+
+        private void RegisterMvc(IServiceCollection services, IEnumerable<Assembly> pluginAssemblies)
+        {
+            var mvcBuilder = services.AddMvc();
+            pluginAssemblies.ForEach(x => mvcBuilder.AddApplicationPart(x));
+            mvcBuilder.AddControllersAsServices();
+        }
+
+        private Assembly[] GetPluginAssemblies()
+        {
+            return Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "TeamScreen.Plugin.*.dll", SearchOption.AllDirectories)
+                .Where(x => !x.Contains("TeamScreen.Plugin.Base.dll"))
+                .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
+                .ToArray();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -95,6 +138,7 @@ namespace TeamScreen
                     name: "default",
                     template: "{controller=Container}/{action=Index}/{id?}");
             });
+            appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
         }
     }
 }

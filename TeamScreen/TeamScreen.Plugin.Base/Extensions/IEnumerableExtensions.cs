@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 
-namespace lib12.Collections
+namespace TeamScreen.Plugin.Base.Extensions
 {
     public static class IEnumerableExtension
     {
