@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
-    <PostBuildEvent>xcopy /y TeamScreen.Plugin.Jira.dll  C:\Users\sa_krzysztof.kalinow\Documents\TeamScreen\TeamScreen\TeamScreen\bin\Debug\netcoreapp1.1</PostBuildEvent>
+    <PostBuildEvent>xcopy /y *.dll  C:\Users\sa_krzysztof.kalinow\Documents\TeamScreen\TeamScreen\TeamScreen\bin\Debug\netcoreapp1.1</PostBuildEvent>
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
 
