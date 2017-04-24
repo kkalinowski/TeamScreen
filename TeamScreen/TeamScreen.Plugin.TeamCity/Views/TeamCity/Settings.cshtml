@@ -2,8 +2,12 @@
 
 <form asp-controller="Settings" asp-action="Save" method="post">
     <div class="form-group">
-        <label for="url">TeamCity Url</label>
+        <label for="url">Url</label>
         <input type="number" class="form-control" id="url" asp-for="Url" min="5">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" asp-for="Username" min="5">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" asp-for="Password" min="5">
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
