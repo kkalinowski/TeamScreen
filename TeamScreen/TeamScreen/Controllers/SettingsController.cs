@@ -26,7 +26,7 @@ namespace TeamScreen.Controllers
         }
 
         [HttpPost]
-        public void Save(CoreSettings settings)
+        public void SaveCoreSettings(CoreSettings settings)
         {
             _settingsService.Set(Const.CorePluginName, settings);
         }

@@ -1,6 +1,6 @@
 @model TeamScreen.Models.Settings.CoreSettings
 
-<form asp-controller="Settings" asp-action="Save" method="post">
+<form asp-controller="Settings" asp-action="SaveCoreSettings" method="post">
     <div class="form-group">
         <label for="interval">Plugin change interval in seconds</label>
         <input type="number" class="form-control" id="interval" asp-for="Interval" min="5">

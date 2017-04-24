@@ -2,13 +2,11 @@
 
 <div id="app">
     <ul class="nav nav-tabs">
-        <li v-for="endpoint in settingsEndpoints"><a data-toggle="tab" v-bind:href="'#' + endpoint.pluginName">{{endpoint.pluginName}}</a></li>
+        <li v-for="endpoint in settingsEndpoints"><a v-bind:href="'#' + endpoint.pluginName" v-on:click="loadSettings(endpoint.settingsUrl)">{{endpoint.pluginName}}</a></li>
     </ul>
 
-    <div class="tab-content">
-        <div v-for="endpoint in settingsEndpoints" v-bind:id="endpoint.pluginName" class="tab-pane fade">
-            
-        </div>
+    <div id="settings-content">
+
     </div>
 </div>
 
@@ -20,17 +18,15 @@
                 settingsEndpoints: []
             },
             methods: {
-                loadSettingsContent: function () {
-                    for (var i = 0; i < this.settingsEndpoints.length; i++) {
-                        $("#" + this.settingsEndpoints[i].pluginName).load(this.settingsEndpoints[i].settingsUrl);
-                    }
-                    $(".tab-pane").first().addClass("active in");
+                loadSettings: function(url) {
+                    $("#settings-content").load(url);
                 }
             },
             mounted: function() {
                 this.$http.get('@Url.Action("GetPluginsEndpoints","Plugin")').then(function(response) {
                     this.settingsEndpoints = response.body;
-                    setTimeout(this.loadSettingsContent, 0);
+                    $(".nav > li").first().addClass("active");
+                    this.loadSettings(this.settingsEndpoints[0].settingsUrl);
                 });
             },
         });
