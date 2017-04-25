@@ -96,3 +96,7 @@ textarea {
     color: #ebebeb;
     margin-left: 0.1em;
 }
+
+#settings-content {
+    padding: 0.5em;
+}
