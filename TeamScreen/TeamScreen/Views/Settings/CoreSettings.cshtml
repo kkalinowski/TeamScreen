@@ -13,9 +13,7 @@
     var coreSettingsVM = new Vue({
         el: "#app",
         data: {
-            settings: {
-                interval: 5,
-            },
+            settings: {},
             saved: false
         },
         methods: {
@@ -26,7 +24,7 @@
                 });
             }
         },
-        mounted: function() {
+        created: function() {
             this.$http.get('@Url.Action("GetCoreSettings","Settings")').then(function(response) {
                 this.settings = response.body;
             });
