@@ -5,8 +5,8 @@
         <label for="interval">Plugin change interval in seconds</label>
         <input type="number" class="form-control" id="interval" v-model="settings.interval" min="5">
     </div>
-    <button class="btn btn-default" v-on:click.prevent="saveSettings">Submit</button>
-    <span v-if="saved" style="color: green">saved</span>
+    <button class="btn btn-default" v-on:click.prevent="saveSettings">Save</button>
+    <span v-if="saved" class="label label-success">saved</span>
 </form>
 
 <script type="text/javascript">
