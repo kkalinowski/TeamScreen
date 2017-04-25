@@ -25,7 +25,6 @@
             mounted: function() {
                 this.$http.get('@Url.Action("GetPluginsEndpoints","Plugin")').then(function(response) {
                     this.settingsEndpoints = response.body;
-                    $(".nav > li").first().addClass("active");
                     this.loadSettings(this.settingsEndpoints[0].settingsUrl);
                 });
             },
