@@ -31,9 +31,9 @@ namespace TeamScreen.Controllers
         }
 
         [HttpPost]
-        public void SaveCoreSettings(CoreSettings settings)
+        public async Task SaveCoreSettings([FromBody]CoreSettings settings)
         {
-            _settingsService.Set(Const.CorePluginName, settings);
+            await _settingsService.Set(Const.CorePluginName, settings);
         }
     }
 }

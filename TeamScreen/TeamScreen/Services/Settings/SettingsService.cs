@@ -37,9 +37,14 @@ namespace TeamScreen.Services.Settings
             var jsonValue = JsonConvert.SerializeObject(value);
             var existing = await _db.PluginSettings.FirstOrDefaultAsync(x => x.Plugin == plugin);
             if (existing != null)
+            {
                 existing.Value = jsonValue;
+                _db.Entry(existing).State = EntityState.Modified;
+            }
             else
+            {
                 await _db.PluginSettings.AddAsync(PluginSetting.Create(plugin, jsonValue));
+            }
 
             await _db.SaveChangesAsync();
         }
