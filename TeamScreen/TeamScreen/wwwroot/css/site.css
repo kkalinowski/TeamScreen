@@ -100,3 +100,11 @@ textarea {
 #settings-content {
     padding-left: 0.5em;
 }
+
+.hover-container {
+    display: none;
+}
+
+.hover-trigger:hover .hover-container {
+    display: inline;
+}
