@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TeamScreen.Migrations
+namespace TeamScreen.Data.Migrations
 {
     public partial class InitialCreate : Migration
     {

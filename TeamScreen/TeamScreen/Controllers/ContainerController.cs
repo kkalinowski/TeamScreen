@@ -1,20 +1,17 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TeamScreen.Data.Services;
 using TeamScreen.Models.Settings;
-using TeamScreen.Services.Plugins;
-using TeamScreen.Services.Settings;
 
 namespace TeamScreen.Controllers
 {
     public class ContainerController : Controller
     {
         private readonly ISettingsService _settingsService;
-        private readonly IPluginService _pluginService;
 
-        public ContainerController(ISettingsService settingsService, IPluginService pluginService)
+        public ContainerController(ISettingsService settingsService)
         {
             _settingsService = settingsService;
-            _pluginService = pluginService;
         }
 
         public async Task<IActionResult> Index()

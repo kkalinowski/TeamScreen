@@ -1,4 +1,4 @@
-﻿namespace TeamScreen.Models.Settings
+﻿namespace TeamScreen.Data.Entities
 {
     public interface ISettings<T> where T : ISettings<T>, new()
     {

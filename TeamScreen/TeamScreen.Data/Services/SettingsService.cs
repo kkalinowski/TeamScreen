@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using TeamScreen.Data;
+using TeamScreen.Data.Context;
 using TeamScreen.Data.Entities;
-using TeamScreen.Models.Settings;
 
-namespace TeamScreen.Services.Settings
+namespace TeamScreen.Data.Services
 {
     public interface ISettingsService
     {

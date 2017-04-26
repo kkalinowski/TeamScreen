@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TeamScreen.Data.Services;
 using TeamScreen.Models.Settings;
-using TeamScreen.Services.Settings;
 
 namespace TeamScreen.Controllers
 {

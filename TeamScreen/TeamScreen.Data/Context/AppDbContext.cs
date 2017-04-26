@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TeamScreen.Data.Entities;
 
-namespace TeamScreen.Data
+namespace TeamScreen.Data.Context
 {
     public class AppDbContext : DbContext
     {

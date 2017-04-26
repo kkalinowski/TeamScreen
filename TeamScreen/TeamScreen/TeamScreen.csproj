@@ -59,10 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\Plugins\" />
-    <Folder Include="Services\Settings\" />
     <Folder Include="Views\Container\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TeamScreen.Data\TeamScreen.Data.csproj" />
     <ProjectReference Include="..\TeamScreen.Plugin.Base\TeamScreen.Plugin.Base.csproj" />
   </ItemGroup>
 

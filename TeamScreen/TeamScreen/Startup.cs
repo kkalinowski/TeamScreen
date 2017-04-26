@@ -18,10 +18,11 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using TeamScreen.Data;
+using TeamScreen.Data.Context;
+using TeamScreen.Data.Services;
 using TeamScreen.Models;
 using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Services.Plugins;
-using TeamScreen.Services.Settings;
 using IdentityDbContext = TeamScreen.Data.IdentityDbContext;
 
 namespace TeamScreen
