@@ -28,7 +28,10 @@ namespace TeamScreen.Controllers
 
         public IActionResult SinglePluginSettings(string plugin)
         {
-            return View(new SinglePluginSettingsModel{Plugin = plugin});
+            if (plugin == Const.CorePluginName)
+                return View(new PluginSettingsEndpoint(Const.CorePluginName, Url.Action("CoreSettings")));
+
+            return View(_pluginService.GetPluginSettingsUrls(plugin, Url));
         }
 
         public PartialViewResult CoreSettings()

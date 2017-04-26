@@ -10,7 +10,7 @@ namespace TeamScreen.Services.Plugins
     {
         string[] GetUsedPluginsUrls(IUrlHelper urlHelper);
         string[] GetPluginsNames();
-        PluginSettingsEndpoint[] GetPluginSettingsUrls(IUrlHelper urlHelper);
+        PluginSettingsEndpoint GetPluginSettingsUrls(string pluginName, IUrlHelper urlHelper);
     }
 
     public class PluginService : IPluginService
@@ -36,11 +36,12 @@ namespace TeamScreen.Services.Plugins
                 .ToArray();
         }
 
-        public PluginSettingsEndpoint[] GetPluginSettingsUrls(IUrlHelper urlHelper)
+        public PluginSettingsEndpoint GetPluginSettingsUrls(string pluginName, IUrlHelper urlHelper)
         {
-            return _plugins
-                .Select(x => new PluginSettingsEndpoint(x.Name, x.GetSettingsUrl(urlHelper)))
-                .ToArray();
+            var plugin = _plugins
+                .FirstOrDefault(x => x.Name == pluginName);
+
+            return new PluginSettingsEndpoint(pluginName, plugin.GetSettingsUrl(urlHelper));
         }
     }
 }
