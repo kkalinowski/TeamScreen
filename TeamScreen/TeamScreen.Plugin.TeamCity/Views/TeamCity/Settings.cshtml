@@ -1,6 +1,6 @@
 ﻿@model TeamScreen.Plugin.TeamCity.Models.TeamCitySettings
 
-<form id="app">
+<form id="teamCitySettingsApp">
     <div class="form-group">
         <label for="url">Url</label>
         <input type="url" class="form-control" id="url" required="required" v-model="settings.url">
@@ -23,13 +23,13 @@
         methods: {
             saveSettings: function (url) {
                 this.saved = false;
-                this.$http.post('@Url.Action("SaveCoreSettings","Settings")', this.settings).then(function(response) {
+                this.$http.post('@Url.Action("SaveSettings", "TeamCity")', this.settings).then(function(response) {
                     this.saved = true;
                 });
             }
         },
         created: function() {
-            this.$http.get('@Url.Action("GetCoreSettings","Settings")').then(function(response) {
+            this.$http.get('@Url.Action("GetSettings", "TeamCity")').then(function(response) {
                 this.settings = response.body;
             });
         },
