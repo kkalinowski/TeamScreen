@@ -68,13 +68,20 @@
 
                 handleKeyboard: function (event) {
                     if (event.keyCode === 32) //space
+                    {
                         this.paused = !this.paused;
+                        event.preventDefault();
+                    }
                     else if (event.keyCode === 37) //left arrow
+                    {
                         this.loadPreviousPlugin();
+                        event.preventDefault();
+                    }
                     else if (event.keyCode === 39) //right arrow
+                    {
                         this.loadNextPlugin();
-
-                    event.preventDefault();
+                        event.preventDefault();
+                    }
                 },
             },
 
