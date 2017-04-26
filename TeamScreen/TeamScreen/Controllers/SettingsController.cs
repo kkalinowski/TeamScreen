@@ -1,22 +1,34 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TeamScreen.Data.Services;
 using TeamScreen.Models.Settings;
+using TeamScreen.Services.Plugins;
 
 namespace TeamScreen.Controllers
 {
     public class SettingsController : Controller
     {
         private readonly ISettingsService _settingsService;
+        private readonly IPluginService _pluginService;
 
-        public SettingsController(ISettingsService settingsService)
+        public SettingsController(ISettingsService settingsService, IPluginService pluginService)
         {
             _settingsService = settingsService;
+            _pluginService = pluginService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var pluginsNames = new List<string> { Const.CorePluginName };
+            pluginsNames.AddRange(_pluginService.GetPluginsNames());
+
+            return View(pluginsNames);
+        }
+
+        public IActionResult SinglePluginSettings(string plugin)
+        {
+            return View(new SinglePluginSettingsModel{Plugin = plugin});
         }
 
         public PartialViewResult CoreSettings()

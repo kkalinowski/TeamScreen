@@ -1,33 +1,15 @@
+@model List<string>
 <h1>Settings</h1>
 
-<div id="appSettings">
-    <ul class="nav nav-tabs">
-        <li v-for="endpoint in settingsEndpoints"><a v-bind:href="'#' + endpoint.pluginName" v-on:click="loadSettings(endpoint.settingsUrl)">{{endpoint.pluginName}}</a></li>
-    </ul>
+@Html.ActionLink("Back to main view", "Index", "Container")
 
-    <div id="settings-content">
+<hr />
 
-    </div>
-</div>
-
-@section Scripts{
-    <script type="text/javascript">
-        var settingsVM = new Vue({
-            el: "#appSettings",
-            data: {
-                settingsEndpoints: []
-            },
-            methods: {
-                loadSettings: function(url) {
-                    $("#settings-content").load(url);
-                }
-            },
-            mounted: function() {
-                this.$http.get('@Url.Action("GetPluginsEndpoints","Plugin")').then(function(response) {
-                    this.settingsEndpoints = response.body;
-                    this.loadSettings(this.settingsEndpoints[0].settingsUrl);
-                });
-            },
-        });
-    </script>
-}
+<ul class="list-inline">
+    @foreach (var pluginName in Model)
+    {
+        <li>
+            @Html.ActionLink(pluginName, "SinglePluginSettings", new { plugin = pluginName }, new { @class = "btn btn-default" })
+        </li>
+    }
+</ul>

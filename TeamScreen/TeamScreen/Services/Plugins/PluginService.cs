@@ -9,6 +9,7 @@ namespace TeamScreen.Services.Plugins
     public interface IPluginService
     {
         string[] GetUsedPluginsUrls(IUrlHelper urlHelper);
+        string[] GetPluginsNames();
         PluginSettingsEndpoint[] GetPluginSettingsUrls(IUrlHelper urlHelper);
     }
 
@@ -25,6 +26,13 @@ namespace TeamScreen.Services.Plugins
         {
             return _plugins
                 .Select(x => x.GetContentUrl(urlHelper))
+                .ToArray();
+        }
+
+        public string[] GetPluginsNames()
+        {
+            return _plugins
+                .Select(x => x.Name)
                 .ToArray();
         }
 

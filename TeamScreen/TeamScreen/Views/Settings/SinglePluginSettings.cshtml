@@ -1,0 +1,42 @@
+@model TeamScreen.Models.Settings.SinglePluginSettingsModel
+<h1>Settings - @Model.Plugin</h1>
+
+@Html.ActionLink("Back to main view", "Index", "Container")
+
+<br/>
+
+@Html.ActionLink("Back to all settings", "Index")
+
+<hr/>
+
+<div id="appSettings">
+    <ul class="nav nav-tabs">
+        <li v-for="endpoint in settingsEndpoints"><a v-bind:href="'#' + endpoint.pluginName" v-on:click="loadSettings(endpoint.settingsUrl)">{{endpoint.pluginName}}</a></li>
+    </ul>
+
+    <div id="settings-content">
+
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var settingsVM = new Vue({
+            el: "#appSettings",
+            data: {
+                settingsEndpoints: []
+            },
+            methods: {
+                loadSettings: function(url) {
+                    $("#settings-content").load(url);
+                }
+            },
+            mounted: function() {
+                this.$http.get('@Url.Action("GetPluginsEndpoints","Plugin")').then(function(response) {
+                    this.settingsEndpoints = response.body;
+                    this.loadSettings(this.settingsEndpoints[0].settingsUrl);
+                });
+            },
+        });
+    </script>
+}
