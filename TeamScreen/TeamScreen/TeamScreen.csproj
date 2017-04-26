@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Content Include="wwwroot\css\bootstrap.min.css" />
+    <Content Include="wwwroot\favicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.5.0" />
