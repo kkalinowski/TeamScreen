@@ -92,9 +92,12 @@ textarea {
     opacity: 0.7;
 }
 
+.control-settings-separate {
+    margin-right: 0.3em;
+}
+
 .settings-button {
     color: #ebebeb;
-    margin-left: 0.1em;
 }
 
 #settings-content {
