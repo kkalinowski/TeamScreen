@@ -82,7 +82,7 @@ textarea {
 }
 
 .controls {
-    font-size: 5em;
+    font-size: 3em;
     position: fixed;
     top: 0.2em;
     right: 0.5em;
@@ -90,6 +90,7 @@ textarea {
 
 .controls i:hover{
     opacity: 0.7;
+    cursor: pointer;
 }
 
 .control-settings-separate {
