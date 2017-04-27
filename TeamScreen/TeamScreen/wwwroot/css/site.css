@@ -81,11 +81,17 @@ textarea {
     height: 7em;
 }
 
-.controls {
-    font-size: 3em;
+.controls-container {
     position: fixed;
-    top: 0.2em;
-    right: 0.5em;
+    top: 0;
+    right: 0;
+    width: 25em;
+    height: 7em;
+}
+
+.controls {
+    margin-right: 0.3em;
+    font-size: 3em;
 }
 
 .controls i:hover{

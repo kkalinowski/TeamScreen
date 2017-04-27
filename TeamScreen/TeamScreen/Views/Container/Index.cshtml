@@ -2,18 +2,20 @@
 
 <div id="app">
     <div id="contentContainer"></div>
-
-    <div class="controls hover-trigger">
-        <i class="fa fa-circle-o-notch fa-spin" v-if="loading"></i>
-        <div class="hover-container">
-            <i class="fa fa-chevron-left" aria-hidden="true" v-on:click="loadPreviousPlugin"></i>
-            <i class="fa fa-pause" aria-hidden="true" v-if="!paused" v-on:click="pause"></i>
-            <i class="fa fa-play" aria-hidden="true" v-if="paused" v-on:click="resume"></i>
-            <i class="fa fa-chevron-right control-settings-separate" aria-hidden="true" v-on:click="loadNextPlugin"></i>
-            <i class="fa fa-arrows-alt" aria-hidden="true" v-on:click="toggleFullScreen"></i>
-            <a href='@Url.Action("Index","Settings")'>
-                <i class="fa fa-cog settings-button" aria-hidden="true"></i>
-            </a>
+    
+    <div class="controls-container hover-trigger">
+        <div class="controls pull-right">
+            <i class="fa fa-circle-o-notch fa-spin" v-if="loading"></i>
+            <div class="hover-container">
+                <i class="fa fa-chevron-left" aria-hidden="true" v-on:click="loadPreviousPlugin"></i>
+                <i class="fa fa-pause" aria-hidden="true" v-if="!paused" v-on:click="pause"></i>
+                <i class="fa fa-play" aria-hidden="true" v-if="paused" v-on:click="resume"></i>
+                <i class="fa fa-chevron-right control-settings-separate" aria-hidden="true" v-on:click="loadNextPlugin"></i>
+                <i class="fa fa-arrows-alt" aria-hidden="true" v-on:click="toggleFullScreen"></i>
+                <a href='@Url.Action("Index", "Settings")'>
+                    <i class="fa fa-cog settings-button" aria-hidden="true"></i>
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -35,6 +37,7 @@
 
             methods: {
                 toggleFullScreen: function () {
+                    //from http://stackoverflow.com/a/36672683/578560
                     var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
                         (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
                         (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
@@ -71,7 +74,7 @@
                     else
                         this.index = this.availablePlugins.length - 1;
 
-                    $("#contentContainer").load(this.availablePlugins[this.index], function () { this.loading = false; });
+                    $("#contentContainer").load(this.availablePlugins[this.index], this.loadingDone);
                 },
                 loadNextPlugin: function () {
                     this.loading = true;
@@ -81,7 +84,7 @@
                     else
                         this.index = 0;
 
-                    $("#contentContainer").load(this.availablePlugins[this.index], function () { this.loading = false; });
+                    $("#contentContainer").load(this.availablePlugins[this.index], this.loadingDone);
                 },
                 pause: function() {
                     this.paused = true;
@@ -117,6 +120,11 @@
                         event.preventDefault();
                     }
                 },
+
+                loadingDone: function () {
+                    //need to be done this way - http://stackoverflow.com/questions/8905143/jquery-load-doesnt-work-with-a-defined-function-as-a-callback
+                    this.loading = false;
+                }
             },
 
             mounted: function () {
