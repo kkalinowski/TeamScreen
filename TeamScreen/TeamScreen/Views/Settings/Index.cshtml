@@ -5,11 +5,13 @@
 
 <hr />
 
-<ul class="list-inline">
-    @foreach (var pluginName in Model)
-    {
-        <li>
-            @Html.ActionLink(pluginName, "SinglePluginSettings", new { plugin = pluginName }, new { @class = "btn btn-default" })
-        </li>
-    }
-</ul>
+<div>
+    <ul class="list-inline">
+        @foreach (var pluginName in Model)
+        {
+            <li>
+                @Html.ActionLink(pluginName, "SinglePluginSettings", new { plugin = pluginName }, new { @class = "btn btn-default" })
+            </li>
+        }
+    </ul>
+</div>

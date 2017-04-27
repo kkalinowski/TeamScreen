@@ -1,4 +1,9 @@
-﻿/* Set widths on the form inputs since otherwise they're 100% wide */
+﻿.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,
 textarea {
@@ -101,7 +106,7 @@ textarea {
 }
 
 #settings-content {
-    padding-left: 0.5em;
+    margin-top: -0.7em;
 }
 
 .hover-container {
