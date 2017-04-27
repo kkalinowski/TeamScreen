@@ -14,8 +14,6 @@ namespace TeamScreen.Plugin.TeamCity.Integration
 
     public class TeamCityService : ITeamCityService
     {
-        private const string RootProject = "_Root";
-
         public async Task<BuildJob[]> GetBuilds(string path, string username, string password)
         {
             var api = RestClient.For<ITeamCityClient>(path);
@@ -24,7 +22,7 @@ namespace TeamScreen.Plugin.TeamCity.Integration
 
             var projects = await api.GetProjectsAsync();
             return projects.Projects
-                .Where(x => x.Id != RootProject)
+                .Where(x => x.Id != Const.RootProject)
                 .SelectMany(x => api.GetLastBuildForProjectAsync(x.Id).Result.BuildJobs)
                 .ToArray();
         }

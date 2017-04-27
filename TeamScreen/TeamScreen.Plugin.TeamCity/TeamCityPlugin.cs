@@ -6,7 +6,7 @@ namespace TeamScreen.Plugin.TeamCity
 {
     public class TeamCityPlugin : IPlugin
     {
-        public string Name { get; } = "TeamCity";
+        public string Name { get; } = Const.PluginName;
 
         public string GetContentUrl(IUrlHelper urlHelper)
         {

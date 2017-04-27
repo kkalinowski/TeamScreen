@@ -4,8 +4,6 @@ namespace TeamScreen.Plugin.TeamCity.Models
 {
     public class TeamCitySettings : ISettings<TeamCitySettings>
     {
-        private const string DefaultTeamCityProjectContainer = "_Root";
-
         public string Url { get; set; }
         public string Project { get; set; }
         public string Username { get; set; }
@@ -13,7 +11,7 @@ namespace TeamScreen.Plugin.TeamCity.Models
 
         public TeamCitySettings WithDefaultValues()
         {
-            Project = DefaultTeamCityProjectContainer;
+            Project = Const.RootProject;
             return this;
         }
     }

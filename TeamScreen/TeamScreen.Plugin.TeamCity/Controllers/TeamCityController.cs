@@ -22,7 +22,7 @@ namespace TeamScreen.Plugin.TeamCity.Controllers
 
         public async Task<PartialViewResult> Content()
         {
-            var settings = await _settingsService.Get<TeamCitySettings>("TeamCity");
+            var settings = await _settingsService.Get<TeamCitySettings>(Const.PluginName);
             var builds = await _teamCityService.GetBuilds(settings.Url, settings.Username, settings.Password);
 
             var models = _buildMapper.Map(builds);
@@ -36,14 +36,14 @@ namespace TeamScreen.Plugin.TeamCity.Controllers
 
         public async Task<JsonResult> GetSettings()
         {
-            var settings = await _settingsService.Get<TeamCitySettings>("TeamCity");
+            var settings = await _settingsService.Get<TeamCitySettings>(Const.PluginName);
             return Json(settings);
         }
 
         [HttpPost]
         public async Task SaveSettings([FromBody]TeamCitySettings settings)
         {
-            await _settingsService.Set("TeamCity", settings);
+            await _settingsService.Set(Const.PluginName, settings);
         }
     }
 }
