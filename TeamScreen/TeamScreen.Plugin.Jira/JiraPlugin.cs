@@ -6,7 +6,7 @@ namespace TeamScreen.Plugin.Jira
 {
     public class JiraPlugin : IPlugin
     {
-        public string Name { get; } = "JIRA";
+        public string Name { get; } = Const.PluginName;
 
         public string GetContentUrl(IUrlHelper urlHelper)
         {
