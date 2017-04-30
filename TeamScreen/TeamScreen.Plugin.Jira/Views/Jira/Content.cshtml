@@ -1,0 +1,36 @@
+﻿@model IEnumerable<TeamScreen.Plugin.Jira.Models.JiraIssuesModel>
+
+<div>
+    <h1>JIRA status</h1>
+
+    <table class="issues-table">
+        <tr>
+            @foreach (var column in Model)
+            {
+                <th>@column.Column</th>
+            }
+        </tr>
+        <tr>
+            @foreach (var column in Model)
+            {
+                <td class="issue-column">
+                    <ul class="issue-list">
+                        @foreach (var issue in column.Issues)
+                        {
+                            <li>
+                                <p class="well well-sm issue">
+                                    <b>
+                                        <span>@issue.Key</span>
+                                        <span class="pull-right">@issue.Fields.Assignee.Name</span>
+                                    </b>
+                                    <br />
+                                    @issue.Fields.Summary
+                                </p>
+                            </li>
+                        }
+                    </ul>
+                </td>
+            }
+        </tr>
+    </table>
+</div>

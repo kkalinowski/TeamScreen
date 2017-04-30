@@ -6,14 +6,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+    <PackageReference Include="NSubstitute" Version="2.0.3" />
     <PackageReference Include="Shouldly" Version="2.8.2" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TeamScreen.Plugin.Jira\TeamScreen.Plugin.Jira.csproj" />
     <ProjectReference Include="..\TeamScreen.Plugin.TeamCity\TeamScreen.Plugin.TeamCity.csproj" />
-    <ProjectReference Include="..\TeamScreen\TeamScreen.csproj" />
   </ItemGroup>
 
   <ItemGroup>

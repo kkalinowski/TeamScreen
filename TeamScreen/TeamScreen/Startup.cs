@@ -15,14 +15,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
-using TeamScreen.Data;
-using TeamScreen.Jira;
+using TeamScreen.Data.Context;
+using TeamScreen.Data.Services;
 using TeamScreen.Models;
-using TeamScreen.Plugin.Base;
 using TeamScreen.Plugin.Base.Extensions;
-using TeamScreen.Services.Jira;
 using TeamScreen.Services.Plugins;
-using TeamScreen.Services.Settings;
 using IdentityDbContext = TeamScreen.Data.IdentityDbContext;
 
 namespace TeamScreen
@@ -66,11 +63,8 @@ namespace TeamScreen
             SetupEmbeddedViewsForPlugins(services, pluginAssemblies);
 
             var builder = new ContainerBuilder();
-            builder.RegisterType<JiraService>().As<IJiraService>();
-            builder.RegisterType<IssueMapper>().As<IIssueMapper>();
             builder.RegisterType<SettingsService>().As<ISettingsService>();
             builder.RegisterType<PluginService>().As<IPluginService>();
-            builder.RegisterType<JiraPlugin>().As<IPlugin>().PreserveExistingDefaults();
             builder.RegisterInstance(Configuration);
             builder.RegisterAssemblyModules(pluginAssemblies);
 

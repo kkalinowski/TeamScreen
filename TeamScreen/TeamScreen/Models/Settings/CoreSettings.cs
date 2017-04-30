@@ -1,4 +1,6 @@
-﻿namespace TeamScreen.Models.Settings
+﻿using TeamScreen.Data.Entities;
+
+namespace TeamScreen.Models.Settings
 {
     public class CoreSettings : ISettings<CoreSettings>
     {

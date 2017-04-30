@@ -1,38 +1,17 @@
+@model List<string>
 <h1>Settings</h1>
 
-<div id="app">
-    <ul class="nav nav-tabs">
-        <li v-for="endpoint in settingsEndpoints"><a data-toggle="tab" v-bind:href="'#' + endpoint.pluginName">{{endpoint.pluginName}}</a></li>
+@Html.ActionLink("Back to main view", "Index", "Container")
+
+<hr />
+
+<div>
+    <ul class="list-inline">
+        @foreach (var pluginName in Model)
+        {
+            <li>
+                @Html.ActionLink(pluginName, "SinglePluginSettings", new { plugin = pluginName }, new { @class = "btn btn-default" })
+            </li>
+        }
     </ul>
-
-    <div class="tab-content">
-        <div v-for="endpoint in settingsEndpoints" v-bind:id="endpoint.pluginName" class="tab-pane fade">
-            
-        </div>
-    </div>
 </div>
-
-@section Scripts{
-    <script type="text/javascript">
-        var vm = new Vue({
-            el: "#app",
-            data: {
-                settingsEndpoints: []
-            },
-            methods: {
-                loadSettingsContent: function () {
-                    for (var i = 0; i < this.settingsEndpoints.length; i++) {
-                        $("#" + this.settingsEndpoints[i].pluginName).load(this.settingsEndpoints[i].settingsUrl);
-                    }
-                    $(".tab-pane").first().addClass("active in");
-                }
-            },
-            mounted: function() {
-                this.$http.get('@Url.Action("GetPluginsEndpoints","Plugin")').then(function(response) {
-                    this.settingsEndpoints = response.body;
-                    setTimeout(this.loadSettingsContent, 0);
-                });
-            },
-        });
-    </script>
-}

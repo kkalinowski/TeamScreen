@@ -1,6 +1,4 @@
-﻿/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
+﻿.body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -78,24 +76,43 @@ textarea {
 }
 
 .issue {
-    border: 1px solid gray;
-    padding: 0.3em;
     height: 7em;
-    border-radius: 0.3em;
+}
+
+.controls-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 25em;
+    height: 7em;
 }
 
 .controls {
-    font-size: 5em;
-    position: fixed;
-    top: 0.2em;
-    right: 0.5em;
+    margin-right: 0.3em;
+    font-size: 3em;
 }
 
 .controls i:hover{
     opacity: 0.7;
+    cursor: pointer;
+}
+
+.control-settings-separate {
+    margin-right: 0.3em;
 }
 
 .settings-button {
-    color: black;
-    margin-left: 0.1em;
+    color: #ebebeb;
+}
+
+#settings-content {
+    margin-top: -0.7em;
+}
+
+.hover-container {
+    display: none;
+}
+
+.hover-trigger:hover .hover-container {
+    display: inline;
 }

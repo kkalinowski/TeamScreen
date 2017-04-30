@@ -1,0 +1,20 @@
+@model TeamScreen.Models.Settings.PluginSettingsEndpoint
+<h1>Settings - @Model.PluginName</h1>
+
+@Html.ActionLink("Back to main view", "Index", "Container")
+
+<br/>
+
+@Html.ActionLink("Back to all settings", "Index")
+
+<hr/>
+
+<div id="settings-content">
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $("#settings-content").load('@Model.SettingsUrl');
+    </script>
+}

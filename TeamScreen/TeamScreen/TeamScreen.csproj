@@ -16,16 +16,25 @@
   <ItemGroup>
     <Compile Remove="wwwroot\images\**" />
     <Compile Remove="wwwroot\js\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\**" />
     <Content Remove="wwwroot\images\**" />
     <Content Remove="wwwroot\js\**" />
+    <Content Remove="wwwroot\lib\bootstrap\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="wwwroot\js\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\**" />
     <None Remove="wwwroot\images\**" />
     <None Remove="wwwroot\js\**" />
+    <None Remove="wwwroot\lib\bootstrap\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\css\bootstrap.min.css" />
+    <Content Include="wwwroot\favicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.5.0" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="1.1.1" />
@@ -41,7 +50,7 @@
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0" PrivateAssets="All" />
-    <PackageReference Include="RestEase" Version="1.3.3" />
+    <PackageReference Include="RestEase" Version="1.4.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0-msbuild3-final" />
@@ -51,10 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\Plugins\" />
-    <Folder Include="Services\Settings\" />
     <Folder Include="Views\Container\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TeamScreen.Data\TeamScreen.Data.csproj" />
     <ProjectReference Include="..\TeamScreen.Plugin.Base\TeamScreen.Plugin.Base.csproj" />
   </ItemGroup>
 

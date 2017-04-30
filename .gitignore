@@ -250,3 +250,5 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+TeamScreen/TeamScreen.Plugin.TeamCity/Properties/launchSettings.json
+TeamScreen/TeamScreen.Plugin.Jira/Properties/launchSettings.json

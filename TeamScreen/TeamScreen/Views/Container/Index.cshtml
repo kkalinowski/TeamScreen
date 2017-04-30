@@ -2,20 +2,28 @@
 
 <div id="app">
     <div id="contentContainer"></div>
-
-    <div class="controls">
-        <i class="fa fa-chevron-left" aria-hidden="true" v-on:click="loadPreviousPlugin"></i>
-        <i class="fa fa-pause" aria-hidden="true" v-if="!paused" v-on:click="pause"></i>
-        <i class="fa fa-play" aria-hidden="true" v-if="paused" v-on:click="resume"></i>
-        <i class="fa fa-chevron-right" aria-hidden="true" v-on:click="loadNextPlugin"></i>
-        <a href='@Url.Action("Index","Settings")'>
-            <i class="fa fa-cog settings-button" aria-hidden="true"></i>
-        </a>
+    
+    <div class="controls-container hover-trigger">
+        <div class="controls pull-right">
+            <i class="fa fa-circle-o-notch fa-spin" v-if="loading"></i>
+            <div class="hover-container">
+                <i class="fa fa-chevron-left" aria-hidden="true" v-on:click="loadPreviousPlugin"></i>
+                <i class="fa fa-pause" aria-hidden="true" v-if="!paused" v-on:click="pause"></i>
+                <i class="fa fa-play" aria-hidden="true" v-if="paused" v-on:click="resume"></i>
+                <i class="fa fa-chevron-right control-settings-separate" aria-hidden="true" v-on:click="loadNextPlugin"></i>
+                <i class="fa fa-arrows-alt" aria-hidden="true" v-on:click="toggleFullScreen"></i>
+                <a href='@Url.Action("Index", "Settings")'>
+                    <i class="fa fa-cog settings-button" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
 @section Scripts{
     <script type="text/javascript">
+
+
         var vm = new Vue({
             el: "#app",
             data: {
@@ -23,23 +31,60 @@
                 availablePlugins: [],
                 interval: @Model.Interval,
                 paused: false,
+                loading: false,
                 timer: 0,
             },
 
             methods: {
+                toggleFullScreen: function () {
+                    //from http://stackoverflow.com/a/36672683/578560
+                    var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+                        (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+                        (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+                        (document.msFullscreenElement && document.msFullscreenElement !== null);
+
+                    var docElm = document.documentElement;
+                    if (!isInFullScreen) {
+                        if (docElm.requestFullscreen) {
+                            docElm.requestFullscreen();
+                        } else if (docElm.mozRequestFullScreen) {
+                            docElm.mozRequestFullScreen();
+                        } else if (docElm.webkitRequestFullScreen) {
+                            docElm.webkitRequestFullScreen();
+                        } else if (docElm.msRequestFullscreen) {
+                            docElm.msRequestFullscreen();
+                        }
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        } else if (document.mozCancelFullScreen) {
+                            document.mozCancelFullScreen();
+                        } else if (document.msExitFullscreen) {
+                            document.msExitFullscreen();
+                        }
+                    }
+                },
                 loadPreviousPlugin: function () {
+                    this.loading = true;
+
                     if (this.index > 0)
                         this.index--;
                     else
                         this.index = this.availablePlugins.length - 1;
-                    $("#contentContainer").load(this.availablePlugins[this.index]);
+
+                    $("#contentContainer").load(this.availablePlugins[this.index], this.loadingDone);
                 },
                 loadNextPlugin: function () {
+                    this.loading = true;
+
                     if (this.index < this.availablePlugins.length - 1)
                         this.index++;
                     else
                         this.index = 0;
-                    $("#contentContainer").load(this.availablePlugins[this.index]);
+
+                    $("#contentContainer").load(this.availablePlugins[this.index], this.loadingDone);
                 },
                 pause: function() {
                     this.paused = true;
@@ -60,14 +105,26 @@
 
                 handleKeyboard: function (event) {
                     if (event.keyCode === 32) //space
+                    {
                         this.paused = !this.paused;
+                        event.preventDefault();
+                    }
                     else if (event.keyCode === 37) //left arrow
+                    {
                         this.loadPreviousPlugin();
+                        event.preventDefault();
+                    }
                     else if (event.keyCode === 39) //right arrow
+                    {
                         this.loadNextPlugin();
-
-                    event.preventDefault();
+                        event.preventDefault();
+                    }
                 },
+
+                loadingDone: function () {
+                    //need to be done this way - http://stackoverflow.com/questions/8905143/jquery-load-doesnt-work-with-a-defined-function-as-a-callback
+                    this.loading = false;
+                }
             },
 
             mounted: function () {
