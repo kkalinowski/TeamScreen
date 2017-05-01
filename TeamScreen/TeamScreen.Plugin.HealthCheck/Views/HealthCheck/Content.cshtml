@@ -1,3 +1,14 @@
-﻿<div class="container">
+﻿@model List<Warden.IWardenCheckResult>
+
+<div>
     <h1>Health check</h1>
+    <hr/>
+    
+    @foreach (var check in Model)
+    {
+        <div class="well">
+            @check.WatcherCheckResult.WatcherName 
+            @check.WatcherCheckResult.IsValid
+        </div>
+    }
 </div>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Warden;
 using Warden.Core;
@@ -29,6 +28,7 @@ namespace TeamScreen.Plugin.HealthCheck.Integration
             return WardenConfiguration
                 .Create()
                 .AddWebWatcher("http://kkalinowski.net")
+                .AddWebWatcher("http://kkalinowski2.net")
                 .SetHooks(x => x.OnIterationCompleted(iteration => results.AddRange(iteration.Results)))
                 .RunOnlyOnce()
                 .Build();
