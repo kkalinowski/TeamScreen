@@ -1,24 +1,50 @@
 ﻿@model List<Warden.IWardenCheckResult>
 
+<style>
+    .check {
+        width: 10em;
+        font-size: 4em;
+    }
+</style>
+
 <div>
     <h1>Health check</h1>
-    <hr/>
-    
-    @foreach (var check in Model)
-    {
-         if (check.IsValid)
-         {
-             <div class="alert alert-success">
-                 @check.WatcherCheckResult.WatcherName 
-                 <i class="fa fa-check" aria-hidden="true"></i>
-             </div>
-         }
-         else
-         {
-             <div class="alert alert-danger">
-                 @check.WatcherCheckResult.WatcherName 
-                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-             </div>
-         }
-    }
+    <hr />
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Errors</div>
+        <div class="panel-body">
+            <ul class="list-inline">
+                @foreach (var check in Model.Where(x => !x.IsValid))
+                {
+                    <li>
+                        <div class="alert alert-danger check">
+                            <span>
+                                @check.WatcherCheckResult.WatcherName
+                                <i class="fa fa-exclamation-triangle pull-right" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <ul class="list-inline">
+                @foreach (var check in Model.Where(x => x.IsValid))
+            {
+                    <li>
+                        <div class="alert alert-success check">
+                            <span>
+                                @check.WatcherCheckResult.WatcherName
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
 </div>

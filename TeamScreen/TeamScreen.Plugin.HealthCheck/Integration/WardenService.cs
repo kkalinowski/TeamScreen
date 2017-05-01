@@ -28,6 +28,8 @@ namespace TeamScreen.Plugin.HealthCheck.Integration
             return WardenConfiguration
                 .Create()
                 .AddWebWatcher("http://kkalinowski.net")
+                .AddWebWatcher("http://kkalinowski.net")
+                .AddWebWatcher("http://kkalinowski2.net")
                 .AddWebWatcher("http://kkalinowski2.net")
                 .SetHooks(x => x.OnIterationCompleted(iteration => results.AddRange(iteration.Results)))
                 .RunOnlyOnce()
