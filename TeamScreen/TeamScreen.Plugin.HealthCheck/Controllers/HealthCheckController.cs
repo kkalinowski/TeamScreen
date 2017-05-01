@@ -19,7 +19,8 @@ namespace TeamScreen.Plugin.HealthCheck.Controllers
 
         public async Task<PartialViewResult> Content()
         {
-            var results = await _wardenService.DoHealthChecks();
+            var settings = await _settingsService.Get<HealthCheckSettings>(Const.PluginName);
+            var results = await _wardenService.DoHealthChecks(settings.Settings);
             return PartialView(results);
         }
 
