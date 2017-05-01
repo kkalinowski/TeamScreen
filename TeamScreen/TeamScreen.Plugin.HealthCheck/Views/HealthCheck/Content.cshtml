@@ -6,9 +6,19 @@
     
     @foreach (var check in Model)
     {
-        <div class="well">
-            @check.WatcherCheckResult.WatcherName 
-            @check.WatcherCheckResult.IsValid
-        </div>
+         if (check.IsValid)
+         {
+             <div class="alert alert-success">
+                 @check.WatcherCheckResult.WatcherName 
+                 <i class="fa fa-check" aria-hidden="true"></i>
+             </div>
+         }
+         else
+         {
+             <div class="alert alert-danger">
+                 @check.WatcherCheckResult.WatcherName 
+                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+             </div>
+         }
     }
 </div>
