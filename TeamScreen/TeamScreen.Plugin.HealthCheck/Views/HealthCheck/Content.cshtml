@@ -5,6 +5,11 @@
         width: 10em;
         font-size: 4em;
     }
+
+    .icon {
+        display: inline-block;
+        vertical-align: middle;
+    }
 </style>
 
 <div>
@@ -21,7 +26,9 @@
                         <div class="alert alert-danger check">
                             <span>
                                 @check.WatcherCheckResult.WatcherName
-                                <i class="fa fa-exclamation-triangle pull-right" aria-hidden="true"></i>
+                                <div class="pull-right">
+                                    <i class="fa fa-exclamation-triangle icon" aria-hidden="true"></i>
+                                </div>
                             </span>
                         </div>
                     </li>
@@ -34,12 +41,14 @@
         <div class="panel-body">
             <ul class="list-inline">
                 @foreach (var check in Model.Where(x => x.IsValid))
-            {
+                {
                     <li>
                         <div class="alert alert-success check">
                             <span>
                                 @check.WatcherCheckResult.WatcherName
-                                <i class="fa fa-check" aria-hidden="true"></i>
+                                <div class="pull-right">
+                                    <i class="fa fa-check icon" aria-hidden="true"></i>
+                                </div>
                             </span>
                         </div>
                     </li>
