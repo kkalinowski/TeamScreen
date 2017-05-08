@@ -29,13 +29,10 @@ namespace TeamScreen.Plugin.HealthCheck.Integration
         private WardenConfiguration Configure(IEnumerable<SingleHealthCheckSettings> settings, List<IWardenCheckResult> results)
         {
             var builder = WardenConfiguration
-                .Create()
-                .AddWebWatcher("http://kkalinowski.net")
-                .AddWebWatcher("http://kkalinowski.net")
-                .AddWebWatcher("http://kkalinowski2.net")
-                .AddWebWatcher("http://kkalinowski2.net");
+                .Create();
 
             settings
+                .Where(x => x.Name.IsNotNullAndNotEmpty() && x.Url.IsNotNullAndNotEmpty())
                 .Select(BuildWebWatcher)
                 .ForEach(x => builder.AddWatcher(x));
 

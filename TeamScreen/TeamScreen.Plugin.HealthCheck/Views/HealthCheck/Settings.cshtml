@@ -9,14 +9,14 @@
 </style>
 
 <div id="app">
-    <div v-for="(index, setting) in settings.settings">
+    <div v-for="(setting, key) in settings.settings">
         <form class="form-inline">
             <div class="form-group single-health-check">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" required="required" v-model="setting.name">
                 <label for="url">Url</label>
                 <input type="url" class="form-control" id="url" required="required" v-model="setting.url">
-                <i class="fa fa-trash-o" aria-hidden="true" v-on:click="removeHealthCheck(index)"></i>
+                <i class="fa fa-trash-o" aria-hidden="true" v-on:click="removeHealthCheck(key)"></i>
             </div>
         </form>
     </div>
@@ -44,8 +44,8 @@
             addWebHealthCheck: function() {
                 this.settings.settings.push({ name: "", url: "" });
             },
-            removeHealthCheck: function(index) {
-                this.settings.settings.splice(index, 1);
+            removeHealthCheck: function (key) {
+                this.settings.settings.splice(key, 1);
             },
         },
         created: function() {
