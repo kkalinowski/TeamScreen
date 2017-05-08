@@ -19,7 +19,7 @@
             saved: false
         },
         methods: {
-            saveSettings: function (url) {
+            saveSettings: function () {
                 this.saved = false;
                 this.$http.post('@Url.Action("SaveSettings", "TeamCity")', this.settings).then(function(response) {
                     this.saved = true;
