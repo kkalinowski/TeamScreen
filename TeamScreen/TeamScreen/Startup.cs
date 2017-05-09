@@ -49,14 +49,8 @@ namespace TeamScreen
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            var connString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(connString, x => x.MigrationsAssembly("TeamScreen.Data"))
-            );
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
+            ConfigureEntityFramework(services);
+            ConfigureIdentity(services);
 
             var pluginAssemblies = GetPluginAssemblies();
             RegisterMvc(services, pluginAssemblies);
@@ -65,13 +59,34 @@ namespace TeamScreen
             var builder = new ContainerBuilder();
             builder.Populate(services);
 
-            //builder.RegisterGeneric(typeof(UserManager<>));
             builder.RegisterType<SettingsService>().As<ISettingsService>();
             builder.RegisterType<PluginService>().As<IPluginService>();
             builder.RegisterAssemblyModules(pluginAssemblies);
 
             this.ApplicationContainer = builder.Build();
             return new AutofacServiceProvider(this.ApplicationContainer);
+        }
+
+        private void ConfigureEntityFramework(IServiceCollection services)
+        {
+            var connString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite(connString, x => x.MigrationsAssembly("TeamScreen.Data"))
+            );
+        }
+
+        private static void ConfigureIdentity(IServiceCollection services)
+        {
+            var identityBuilder = services.AddIdentity<ApplicationUser, IdentityRole>(x =>
+            {
+                x.Password.RequiredLength = 6;
+                x.Password.RequireDigit = false;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequireLowercase = false;
+                x.Password.RequireUppercase = false;
+            })
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
         }
 
         private void SetupEmbeddedViewsForPlugins(IServiceCollection services, IEnumerable<Assembly> pluginAssemblies)
