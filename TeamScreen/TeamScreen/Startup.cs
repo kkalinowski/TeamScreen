@@ -55,7 +55,7 @@ namespace TeamScreen
             );
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<IdentityDbContext>()
+                .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
             var pluginAssemblies = GetPluginAssemblies();
