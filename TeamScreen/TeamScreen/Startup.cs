@@ -20,6 +20,7 @@ using TeamScreen.Data.Services;
 using TeamScreen.Models;
 using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Services.Plugins;
+using Microsoft.AspNetCore.Identity;
 
 namespace TeamScreen
 {
@@ -62,12 +63,13 @@ namespace TeamScreen
             SetupEmbeddedViewsForPlugins(services, pluginAssemblies);
 
             var builder = new ContainerBuilder();
+            builder.Populate(services);
+
+            //builder.RegisterGeneric(typeof(UserManager<>));
             builder.RegisterType<SettingsService>().As<ISettingsService>();
             builder.RegisterType<PluginService>().As<IPluginService>();
-            builder.RegisterInstance(Configuration);
             builder.RegisterAssemblyModules(pluginAssemblies);
 
-            builder.Populate(services);
             this.ApplicationContainer = builder.Build();
             return new AutofacServiceProvider(this.ApplicationContainer);
         }
