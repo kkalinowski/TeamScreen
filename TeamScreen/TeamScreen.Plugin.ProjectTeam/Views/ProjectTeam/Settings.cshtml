@@ -1,12 +1,12 @@
 ﻿<form id="app">
-    @*<div class="form-group">
-        <label for="url">Url</label>
-        <input type="url" class="form-control" id="url" required="required" v-model="settings.url">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" required="required" v-model="settings.username">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" required="required" v-model="settings.password">
-    </div>*@
+    <div class="form-group">
+        <label for="name">Project name</label>
+        <input type="text" class="form-control" id="name" required="required" v-model="settings.name">
+        <label for="techs">Used technologies [split by comma]</label>
+        <input type="text" class="form-control" id="techs" required="required" v-model="settings.techs">
+        <label for="description">Project description</label>
+        <textarea class="form-control" id="description" rows="5" cols="50" required="required" v-model="settings.description"></textarea>
+    </div>
     <button class="btn btn-default" v-on:click.prevent="saveSettings">Save</button>
     <span v-if="saved" class="label label-success">saved</span>
 </form>
@@ -21,7 +21,7 @@
         methods: {
             saveSettings: function (url) {
                 this.saved = false;
-                this.$http.post('@Url.Action("SaveSettings", "ProjectTeam")', this.settings).then(function(response) {
+                this.$http.post('@Url.Action("SaveSettings", "ProjectTeam")', this.settings).then(function() {
                     this.saved = true;
                 });
             }
