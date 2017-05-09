@@ -1,0 +1,57 @@
+﻿<style>
+    .single-health-check {
+        margin: 0.35em 0.7em 0.35em 0.7em !important;
+    }
+
+        .single-health-check input {
+            margin-right: 0.5em;
+        }
+</style>
+
+<div id="app">
+    <div v-for="(setting, key) in settings.settings">
+        <form class="form-inline">
+            <div class="form-group single-health-check">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required="required" v-model="setting.name">
+                <label for="url">Url</label>
+                <input type="url" class="form-control" id="url" required="required" v-model="setting.url">
+                <i class="fa fa-trash-o" aria-hidden="true" v-on:click="removeHealthCheck(key)"></i>
+            </div>
+        </form>
+    </div>
+    <button class="btn btn-default" v-on:click.prevent="addWebHealthCheck">Add web health check</button>
+    <button class="btn btn-default" v-on:click.prevent="saveSettings">Save</button>
+    <span v-if="saved" class="label label-success">saved</span>
+</div>
+
+<script type="text/javascript">
+    var teamCitySettingsVM = new Vue({
+        el: "#app",
+        data: {
+            settings: {
+                settings: []
+            },
+            saved: false
+        },
+        methods: {
+            saveSettings: function () {
+                this.saved = false;
+                this.$http.post('@Url.Action("SaveSettings", "HealthCheck")', this.settings).then(function(response) {
+                    this.saved = true;
+                });
+            },
+            addWebHealthCheck: function() {
+                this.settings.settings.push({ name: "", url: "" });
+            },
+            removeHealthCheck: function (key) {
+                this.settings.settings.splice(key, 1);
+            },
+        },
+        created: function() {
+            this.$http.get('@Url.Action("GetSettings", "HealthCheck")').then(function(response) {
+                this.settings = response.body;
+            });
+        },
+    });
+</script>
