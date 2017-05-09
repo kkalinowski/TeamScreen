@@ -50,7 +50,7 @@ namespace TeamScreen
         {
             var connString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(connString)
+                options.UseSqlite(connString, x => x.MigrationsAssembly("TeamScreen.Data"))
             );
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
