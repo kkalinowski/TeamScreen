@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TeamScreen.Data.Entities;
+using TeamScreen.Models;
 
 namespace TeamScreen.Data.Context
 {

@@ -20,7 +20,6 @@ using TeamScreen.Data.Services;
 using TeamScreen.Models;
 using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Services.Plugins;
-using IdentityDbContext = TeamScreen.Data.IdentityDbContext;
 
 namespace TeamScreen
 {
