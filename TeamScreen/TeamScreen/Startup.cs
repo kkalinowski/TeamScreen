@@ -21,6 +21,7 @@ using TeamScreen.Models;
 using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Services.Plugins;
 using Microsoft.AspNetCore.Identity;
+using TeamScreen.Data.Entities;
 
 namespace TeamScreen
 {

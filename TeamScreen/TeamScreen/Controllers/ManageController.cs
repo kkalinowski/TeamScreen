@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TeamScreen.Data.Entities;
 using TeamScreen.Models;
 using TeamScreen.Models.ManageViewModels;
 using TeamScreen.Services;
