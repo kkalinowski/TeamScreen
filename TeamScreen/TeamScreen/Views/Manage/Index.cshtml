@@ -10,6 +10,14 @@
     <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>User:</dt>
+        <dd>@Model.Name</dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>Email:</dt>
+        <dd>@Model.Email</dd>
+    </dl>
+    <dl class="dl-horizontal">
         <dt>Password:</dt>
         <dd>
             @if (Model.HasPassword)
@@ -20,6 +28,6 @@
             {
                 <a asp-controller="Manage" asp-action="SetPassword" class="btn-bracketed">Create</a>
             }
-        </dd>        
+        </dd>
     </dl>
 </div>

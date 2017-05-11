@@ -45,8 +45,9 @@ namespace TeamScreen.Controllers
             }
             var model = new IndexViewModel
             {
+                Name = user.UserName,
+                Email = user.Email,
                 HasPassword = await _userManager.HasPasswordAsync(user),
-                BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user)
             };
             return View(model);
         }
