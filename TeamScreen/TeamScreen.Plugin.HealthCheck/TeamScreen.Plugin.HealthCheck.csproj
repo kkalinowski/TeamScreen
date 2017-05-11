@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <PostBuildEvent>xcopy /y *.dll  ..\..\..\..\TeamScreen\bin\Debug\netcoreapp1.1</PostBuildEvent>
@@ -28,5 +27,4 @@
     <ProjectReference Include="..\TeamScreen.Data\TeamScreen.Data.csproj" />
     <ProjectReference Include="..\TeamScreen.Plugin.Base\TeamScreen.Plugin.Base.csproj" />
   </ItemGroup>
-
 </Project>
