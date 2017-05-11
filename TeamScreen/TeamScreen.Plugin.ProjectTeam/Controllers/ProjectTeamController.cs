@@ -1,5 +1,9 @@
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TeamScreen.Data.Entities;
 using TeamScreen.Data.Services;
 using TeamScreen.Plugin.ProjectTeam.Models;
 
@@ -8,15 +12,27 @@ namespace TeamScreen.Plugin.ProjectTeam.Controllers
     public class ProjectTeamController : Controller
     {
         private readonly ISettingsService _settingsService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ProjectTeamController(ISettingsService settingsService)
+        public ProjectTeamController(ISettingsService settingsService, UserManager<ApplicationUser> userManager)
         {
             _settingsService = settingsService;
+            _userManager = userManager;
         }
 
         public async Task<PartialViewResult> Content()
         {
-            return PartialView();
+            var settings = await _settingsService.Get<ProjectTeamSettings>(Const.PluginName);
+            var users = await _userManager.Users.ToArrayAsync();
+
+            var model = new ProjectTeamContentModel
+            {
+                ProjectName = settings.Name,
+                Description = settings.Description,
+                UsedTechnologies = settings.Techs.Split(',').Select(x => x.Trim()).ToArray(),
+                People = users
+            };
+            return PartialView(model);
         }
 
         public PartialViewResult Settings()

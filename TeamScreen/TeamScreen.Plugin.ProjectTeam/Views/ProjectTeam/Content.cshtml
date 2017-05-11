@@ -1,3 +1,19 @@
-﻿<div class="container">
-    <h1>ProjectTeam</h1>
+﻿@model TeamScreen.Plugin.ProjectTeam.Models.ProjectTeamContentModel
+<div class="container">
+    <h1>@Model.ProjectName</h1>
+
+    @foreach (var user in Model.People)
+    {
+        <span>user.Email</span>
+    }
+    
+    <div class="row">
+        <div class="col-md-8">@Model.Description</div>
+        <div class="col-md-4">
+            @foreach (var tech in Model.UsedTechnologies)
+            {
+                <span>tech</span>
+            }
+        </div>
+    </div>
 </div>
