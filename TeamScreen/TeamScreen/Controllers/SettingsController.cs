@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TeamScreen.Data.Services;
 using TeamScreen.Models.Settings;
@@ -7,6 +8,7 @@ using TeamScreen.Services.Plugins;
 
 namespace TeamScreen.Controllers
 {
+    [Authorize]
     public class SettingsController : Controller
     {
         private readonly IPluginService _pluginService;
