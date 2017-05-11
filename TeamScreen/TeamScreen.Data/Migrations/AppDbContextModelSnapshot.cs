@@ -160,6 +160,8 @@ namespace TeamScreen.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
+                    b.Property<byte[]>("UserPhoto");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")

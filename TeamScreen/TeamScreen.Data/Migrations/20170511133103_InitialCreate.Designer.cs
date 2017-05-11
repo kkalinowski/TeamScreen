@@ -8,7 +8,7 @@ using TeamScreen.Data.Context;
 namespace TeamScreen.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20170511125345_InitialCreate")]
+    [Migration("20170511133103_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -160,6 +160,8 @@ namespace TeamScreen.Data.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
+
+                    b.Property<byte[]>("UserPhoto");
 
                     b.HasKey("Id");
 

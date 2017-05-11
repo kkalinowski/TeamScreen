@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="TeamScreen.sqlite" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="TeamScreen.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
