@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -118,6 +120,26 @@ namespace TeamScreen.Controllers
                 return View(model);
             }
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+        }
+
+        [HttpGet]
+        public IActionResult ChangePhoto()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePhoto(IFormFile photo)
+        {
+            var memoryStream = new MemoryStream();
+            await photo.CopyToAsync(memoryStream);
+
+            var user = await GetCurrentUserAsync();
+            user.UserPhoto = memoryStream.ToArray();
+            await _userManager.UpdateAsync(user);
+
+            return RedirectToAction("Index");
         }
 
         #region Helpers
