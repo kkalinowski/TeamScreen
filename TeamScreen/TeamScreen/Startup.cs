@@ -77,13 +77,15 @@ namespace TeamScreen
         private static void ConfigureIdentity(IServiceCollection services)
         {
             services.AddIdentity<ApplicationUser, IdentityRole>(x =>
-            {
-                x.Password.RequiredLength = 6;
-                x.Password.RequireDigit = false;
-                x.Password.RequireNonAlphanumeric = false;
-                x.Password.RequireLowercase = false;
-                x.Password.RequireUppercase = false;
-            })
+                {
+                    x.User.RequireUniqueEmail = true;
+                    x.User.AllowedUserNameCharacters = x.User.AllowedUserNameCharacters + " ";
+                    x.Password.RequiredLength = 6;
+                    x.Password.RequireDigit = false;
+                    x.Password.RequireNonAlphanumeric = false;
+                    x.Password.RequireLowercase = false;
+                    x.Password.RequireUppercase = false;
+                })
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
         }
