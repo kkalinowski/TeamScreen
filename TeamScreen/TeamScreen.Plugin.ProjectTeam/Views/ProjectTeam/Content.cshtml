@@ -1,0 +1,23 @@
+﻿@model TeamScreen.Plugin.ProjectTeam.Models.ProjectTeamContentModel
+
+<div class="jumbotron">
+    <h1>@Model.ProjectName</h1>
+
+    <ul class="list-inline">
+        @foreach (var user in Model.People)
+        {
+            <li>
+                <img class="photo" src="@Url.Action("GetByEmail", "Photo", new {user.Email})" />
+                <br/>
+                <span style="text-align: center">@user.FullName</span>
+            </li>
+        }
+    </ul>
+
+    <p>@Model.Description</p>
+    <h3>We use:</h3>
+    @foreach (var tech in Model.UsedTechnologies)
+    {
+        <span>@tech</span>
+    }
+</div>

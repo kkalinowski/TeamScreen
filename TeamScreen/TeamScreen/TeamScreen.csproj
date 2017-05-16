@@ -14,16 +14,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\images\**" />
     <Compile Remove="wwwroot\js\**" />
     <Compile Remove="wwwroot\lib\bootstrap\**" />
-    <Content Remove="wwwroot\images\**" />
     <Content Remove="wwwroot\js\**" />
     <Content Remove="wwwroot\lib\bootstrap\**" />
-    <EmbeddedResource Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="wwwroot\js\**" />
     <EmbeddedResource Remove="wwwroot\lib\bootstrap\**" />
-    <None Remove="wwwroot\images\**" />
     <None Remove="wwwroot\js\**" />
     <None Remove="wwwroot\lib\bootstrap\**" />
   </ItemGroup>
@@ -31,6 +27,7 @@
   <ItemGroup>
     <Content Include="wwwroot\css\bootstrap.min.css" />
     <Content Include="wwwroot\favicon.ico" />
+    <Content Include="wwwroot\images\fallback_photo.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.5.0" />
@@ -41,9 +38,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1" />

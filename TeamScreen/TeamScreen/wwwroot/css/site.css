@@ -116,3 +116,11 @@ textarea {
 .hover-trigger:hover .hover-container {
     display: inline;
 }
+
+.photo {
+    width: 8em;
+}
+
+.jumbotron {
+    padding: 2em 6em 6em 6em !important;
+}

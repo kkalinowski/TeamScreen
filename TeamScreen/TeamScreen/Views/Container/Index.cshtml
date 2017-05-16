@@ -1,4 +1,4 @@
-@model TeamScreen.Models.Settings.CoreSettings
+@model TeamScreen.Models.Container.ContainerModel
 
 <div id="app">
     <div id="contentContainer"></div>
@@ -15,6 +15,12 @@
                 <a href='@Url.Action("Index", "Settings")'>
                     <i class="fa fa-cog settings-button" aria-hidden="true"></i>
                 </a>
+                <a href='@Url.Action("Index", "Manage")'>
+                    <i class="fa fa-user settings-button" aria-hidden="true"></i>
+                </a>
+                @*<a href='@Url.Action("Logout", "Account")'>
+                    <i class="fa fa-sign-out settings-button" aria-hidden="true"></i>
+                </a>*@
             </div>
         </div>
     </div>
@@ -29,7 +35,7 @@
             data: {
                 index: 0,
                 availablePlugins: [],
-                interval: @Model.Interval,
+                interval: @Model.Settings.Interval,
                 paused: false,
                 loading: false,
                 timer: 0,

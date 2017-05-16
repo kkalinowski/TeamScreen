@@ -1,0 +1,21 @@
+﻿@model SetPasswordViewModel
+@{
+    ViewData["Title"] = "Change photo";
+}
+
+<form asp-controller="Manage" asp-action="ChangePhoto" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post"
+      enctype="multipart/form-data" class="form-horizontal">
+    <h4>Set your photo</h4>
+    <hr />
+    <fieldset>
+        @Html.AntiForgeryToken()
+        <legend>Photo</legend>
+        <div class="form-group">
+            <label for="photo" class="control-label">File name:</label>
+            <input class="form-control" name="photo" id="photo" type="file"/>
+        </div>
+        <p>
+            <input type="submit" value="Change"/>
+        </p>
+    </fieldset>
+</form>

@@ -1,0 +1,35 @@
+﻿<form id="app">
+    <div class="form-group">
+        <label for="name">Project name</label>
+        <input type="text" class="form-control" id="name" required="required" v-model="settings.name">
+        <label for="techs">Used technologies [split by comma]</label>
+        <input type="text" class="form-control" id="techs" required="required" v-model="settings.techs">
+        <label for="description">Project description</label>
+        <textarea class="form-control" id="description" rows="5" cols="50" required="required" v-model="settings.description"></textarea>
+    </div>
+    <button class="btn btn-default" v-on:click.prevent="saveSettings">Save</button>
+    <span v-if="saved" class="label label-success">saved</span>
+</form>
+
+<script type="text/javascript">
+    var teamCitySettingsVM = new Vue({
+        el: "#app",
+        data: {
+            settings: {},
+            saved: false
+        },
+        methods: {
+            saveSettings: function (url) {
+                this.saved = false;
+                this.$http.post('@Url.Action("SaveSettings", "ProjectTeam")', this.settings).then(function() {
+                    this.saved = true;
+                });
+            }
+        },
+        created: function() {
+            this.$http.get('@Url.Action("GetSettings", "ProjectTeam")').then(function(response) {
+                this.settings = response.body;
+            });
+        },
+    });
+</script>
