@@ -17,10 +17,8 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using TeamScreen.Data.Context;
 using TeamScreen.Data.Services;
-using TeamScreen.Models;
 using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Services.Plugins;
-using Microsoft.AspNetCore.Identity;
 using TeamScreen.Data.Entities;
 
 namespace TeamScreen
@@ -78,7 +76,7 @@ namespace TeamScreen
 
         private static void ConfigureIdentity(IServiceCollection services)
         {
-            var identityBuilder = services.AddIdentity<ApplicationUser, IdentityRole>(x =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(x =>
             {
                 x.Password.RequiredLength = 6;
                 x.Password.RequireDigit = false;
@@ -86,8 +84,8 @@ namespace TeamScreen
                 x.Password.RequireLowercase = false;
                 x.Password.RequireUppercase = false;
             })
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
         }
 
         private void SetupEmbeddedViewsForPlugins(IServiceCollection services, IEnumerable<Assembly> pluginAssemblies)
@@ -111,7 +109,7 @@ namespace TeamScreen
 
         private Assembly[] GetPluginAssemblies()
         {
-            return Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "TeamScreen.Plugin.*.dll", SearchOption.AllDirectories)
+            return Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "TeamScreen.Plugin.ProjectTeam.dll", SearchOption.AllDirectories)
                 .Where(x => !x.Contains("TeamScreen.Plugin.Base.dll"))
                 .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
                 .ToArray();

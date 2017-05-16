@@ -22,7 +22,7 @@ namespace TeamScreen.Controllers
         public async Task<FileContentResult> GetByEmail(string email)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == email);
-            if (user == null)
+            if (user?.UserPhoto == null)
                 return GetFallBackPhoto();
 
             return new FileContentResult(user.UserPhoto, "image/jpeg");
@@ -30,7 +30,7 @@ namespace TeamScreen.Controllers
 
         private FileContentResult GetFallBackPhoto()
         {
-            var fileName = Path.Combine(_hostingEnvironment.WebRootPath, "~/wwwroot/images/fallback_photo.png");
+            var fileName = Path.Combine(_hostingEnvironment.WebRootPath, "images\\fallback_photo.png");
             var content = System.IO.File.ReadAllBytes(fileName);
 
             return File(content, "image/png");
