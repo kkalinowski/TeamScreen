@@ -5,8 +5,8 @@ namespace TeamScreen.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "Full name")]
+        public string FullName { get; set; }
 
         [Required]
         [EmailAddress]
