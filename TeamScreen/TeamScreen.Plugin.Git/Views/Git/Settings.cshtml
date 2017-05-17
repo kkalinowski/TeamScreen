@@ -1,12 +1,14 @@
 ﻿<form id="app">
-    @*<div class="form-group">
-        <label for="url">Url</label>
-        <input type="url" class="form-control" id="url" required="required" v-model="settings.url">
+    <div class="form-group">
         <label for="username">Username</label>
         <input type="text" class="form-control" id="username" required="required" v-model="settings.username">
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" required="required" v-model="settings.password">
-    </div>*@
+        <label for="owner">Owner</label>
+        <input type="text" class="form-control" id="owner" required="required" v-model="settings.owner">
+        <label for="repository">Repository</label>
+        <input type="text" class="form-control" id="repository" required="required" v-model="settings.repository">
+    </div>
     <button class="btn btn-default" v-on:click.prevent="saveSettings">Save</button>
     <span v-if="saved" class="label label-success">saved</span>
 </form>
