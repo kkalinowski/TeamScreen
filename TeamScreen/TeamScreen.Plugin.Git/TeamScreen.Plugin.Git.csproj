@@ -8,11 +8,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Git\Content.cshtml" />
+    <Content Remove="Views\Git\Settings.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Git\Content.cshtml" />
+    <EmbeddedResource Include="Views\Git\Settings.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TeamScreen.Data\TeamScreen.Data.csproj" />
     <ProjectReference Include="..\TeamScreen.Plugin.Base\TeamScreen.Plugin.Base.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Integration\" />
   </ItemGroup>
 </Project>
