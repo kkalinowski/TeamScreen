@@ -8,14 +8,16 @@ namespace TeamScreen.Plugin.Git.Integration
 {
     public interface IGitHubService
     {
-        Task<GetCommitsResponse> GetBuilds(string path, string username, string password, string owner, string repo);
+        Task<GetCommitsResponse> GetCommits(string username, string password, string owner, string repo);
     }
 
     public class GitHubService : IGitHubService
     {
-        public async Task<GetCommitsResponse> GetBuilds(string path, string username, string password, string owner, string repo)
+        private const string GitHubApiPath = "https://api.github.com/";
+
+        public async Task<GetCommitsResponse> GetCommits(string username, string password, string owner, string repo)
         {
-            var api = RestClient.For<IGitHubClient>(path);
+            var api = RestClient.For<IGitHubClient>(GitHubApiPath);
             var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{password}"));
             api.Authorization = new AuthenticationHeaderValue("Basic", credentials);
 

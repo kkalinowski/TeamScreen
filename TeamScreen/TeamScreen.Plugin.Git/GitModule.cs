@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using TeamScreen.Plugin.Base;
 using TeamScreen.Plugin.Git.Integration;
+using TeamScreen.Plugin.Git.Mapping;
 
 namespace TeamScreen.Plugin.Git
 {
@@ -10,6 +11,7 @@ namespace TeamScreen.Plugin.Git
         {
             builder.RegisterType<GitPlugin>().As<IPlugin>().PreserveExistingDefaults();
             builder.RegisterType<GitHubService>().As<IGitHubService>();
+            builder.RegisterType<GitMapper>().As<IGitMapper>();
         }
     }
 }

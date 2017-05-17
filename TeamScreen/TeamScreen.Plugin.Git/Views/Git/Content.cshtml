@@ -1,3 +1,12 @@
-﻿<div class="container">
-    <h1>Git</h1>
-</div>
+﻿@model TeamScreen.Plugin.Git.Models.GitModel
+
+<h1>@Model.RepositoryName</h1>
+
+@foreach (var commit in Model.Commits)
+{
+    @commit.Message
+    <br/>
+    @commit.AuthorEmail
+    <br/>
+    @commit.Date
+}
