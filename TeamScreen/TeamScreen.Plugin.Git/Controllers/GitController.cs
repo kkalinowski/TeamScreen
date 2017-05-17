@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TeamScreen.Data.Services;
+using TeamScreen.Plugin.Git.Integration;
 using TeamScreen.Plugin.Git.Models;
 
 namespace TeamScreen.Plugin.Git.Controllers
@@ -8,10 +9,12 @@ namespace TeamScreen.Plugin.Git.Controllers
     public class GitController : Controller
     {
         private readonly ISettingsService _settingsService;
+        private readonly IGitHubService _gitHubService;
 
-        public GitController(ISettingsService settingsService)
+        public GitController(ISettingsService settingsService, IGitHubService gitHubService)
         {
             _settingsService = settingsService;
+            _gitHubService = gitHubService;
         }
 
         public async Task<PartialViewResult> Content()
