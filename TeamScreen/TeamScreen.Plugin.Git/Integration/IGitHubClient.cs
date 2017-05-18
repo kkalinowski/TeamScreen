@@ -4,7 +4,7 @@ using RestEase;
 
 namespace TeamScreen.Plugin.Git.Integration
 {
-    [Header("Accept", "application/json")]
+    [Header("User-Agent", "TeamScreen")]//GitHub requires user-agent
     public interface IGitHubClient
     {
         [Header("Authorization")]
