@@ -1,6 +1,16 @@
 ﻿@model TeamScreen.Plugin.Git.Models.GitModel
 
-<h1>@Model.RepositoryName</h1>
+<style>
+    .commit {
+        height: 6em;
+    }
+        .commit img {
+            width: 4.5em;
+            margin-top: -1.8em;
+        }
+</style>
+
+<h1>@Model.RepositoryName repository</h1>
 
 <div class="container">
     <div class="row">
@@ -8,11 +18,11 @@
             <h2>Recent commits:</h2>
             @foreach (var commit in Model.Commits)
             {
-                <div class="clearfix">
+                <div class="commit clearfix">
                     <h4>@commit.Message</h4>
                     @commit.Date
-                    @commit.AuthorEmail
-                    <img class="photo pull-right" src="@Url.Action("GetByEmail", "Photo", new {email = commit.AuthorEmail})" />
+
+                    <img class="pull-right" src="@Url.Action("GetByEmail", "Photo", new {email = commit.AuthorEmail})" />
                 </div>
             }
         </div>
