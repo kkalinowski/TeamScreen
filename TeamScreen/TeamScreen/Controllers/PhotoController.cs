@@ -21,6 +21,9 @@ namespace TeamScreen.Controllers
 
         public async Task<FileContentResult> GetByEmail(string email)
         {
+            if (string.IsNullOrEmpty(email))
+                return GetFallBackPhoto();
+
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == email);
             if (user?.UserPhoto == null)
                 return GetFallBackPhoto();
