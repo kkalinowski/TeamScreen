@@ -11,6 +11,6 @@ namespace TeamScreen.Plugin.Git.Integration
         AuthenticationHeaderValue Authorization { get; set; }
 
         [Get("/repos/{owner}/{repo}/commits")]
-        Task<GetCommitsResponse> GetCommitsAsync([Path]string owner, [Path]string repo);
+        Task<GetCommitsResponse[]> GetCommitsAsync([Path]string owner, [Path]string repo);
     }
 }
