@@ -2,11 +2,20 @@
 
 <h1>@Model.RepositoryName</h1>
 
-@foreach (var commit in Model.Commits)
-{
-    @commit.Message
-    <br/>
-    @commit.AuthorEmail
-    <br/>
-    @commit.Date
-}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Recent commits:</h2>
+            @foreach (var commit in Model.Commits)
+            {
+                <div>
+                    <h4>@commit.Message</h4>
+                    @commit.Date
+
+                    <img class="photo pull-right" src="@Url.Action("GetByEmail", "Photo", new {commit.AuthorEmail})"/>
+                </div>
+            }
+        </div>
+        <div class="col-xs-6"></div>
+    </div>
+</div>
