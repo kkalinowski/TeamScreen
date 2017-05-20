@@ -29,6 +29,8 @@ namespace TeamScreen.Plugin.Git.Controllers
                 settings.Repository);
             var tags = await _gitHubService.GetTags(settings.Username, settings.Password, settings.Owner,
                 settings.Repository);
+            var collaborators = await _gitHubService.GetCollaborators(settings.Username, settings.Password, settings.Owner,
+                settings.Repository);
 
             var model = new GitModel
             {
@@ -36,7 +38,8 @@ namespace TeamScreen.Plugin.Git.Controllers
                 Commits = _gitMapper.MapCommits(commits),
                 NumberOfTodaysCommits = _gitMapper.GetNumberOfTodaysCommits(commits),
                 BranchesCount = branches.Length,
-                TagsCount = tags.Length
+                TagsCount = tags.Length,
+                CollaboratorsCount = collaborators.Length
             };
             return PartialView(model);
         }

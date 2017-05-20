@@ -7,5 +7,6 @@
         public int NumberOfTodaysCommits { get; set; }
         public int BranchesCount { get; set; }
         public int TagsCount { get; set; }
+        public int CollaboratorsCount { get; set; }
     }
 }
