@@ -29,7 +29,8 @@ namespace TeamScreen.Plugin.Git.Controllers
             var model = new GitModel
             {
                 RepositoryName = settings.Repository,
-                Commits = _gitMapper.MapCommits(commits)
+                Commits = _gitMapper.MapCommits(commits),
+                NumberOfTodaysCommits = _gitMapper.GetNumberOfTodaysCommits(commits)
             };
             return PartialView(model);
         }
