@@ -15,5 +15,8 @@ namespace TeamScreen.Plugin.Git.Integration
 
         [Get("/repos/{owner}/{repo}/branches")]
         Task<GetBranchesResponse[]> GetBranchesAsync([Path]string owner, [Path]string repo);
+
+        [Get("/repos/{owner}/{repo}/tags")]
+        Task<GetTagsResponse[]> GetTagsAsync([Path]string owner, [Path]string repo);
     }
 }

@@ -6,5 +6,6 @@
         public CommitModel[] Commits { get; set; }
         public int NumberOfTodaysCommits { get; set; }
         public int BranchesCount { get; set; }
+        public int TagsCount { get; set; }
     }
 }

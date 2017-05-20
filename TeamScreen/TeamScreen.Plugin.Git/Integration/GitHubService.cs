@@ -10,6 +10,7 @@ namespace TeamScreen.Plugin.Git.Integration
     {
         Task<GetCommitsResponse[]> GetCommits(string username, string password, string owner, string repo);
         Task<GetBranchesResponse[]> GetBranches(string username, string password, string owner, string repo);
+        Task<GetTagsResponse[]> GetTags(string username, string password, string owner, string repo);
     }
 
     public class GitHubService : IGitHubService
@@ -26,6 +27,12 @@ namespace TeamScreen.Plugin.Git.Integration
         {
             var api = CreateApi(username, password);
             return await api.GetBranchesAsync(owner, repo);
+        }
+
+        public async Task<GetTagsResponse[]> GetTags(string username, string password, string owner, string repo)
+        {
+            var api = CreateApi(username, password);
+            return await api.GetTagsAsync(owner, repo);
         }
 
         private IGitHubClient CreateApi(string username, string password)

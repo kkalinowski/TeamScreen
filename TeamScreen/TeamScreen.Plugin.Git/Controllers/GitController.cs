@@ -27,13 +27,16 @@ namespace TeamScreen.Plugin.Git.Controllers
                 settings.Repository);
             var branches = await _gitHubService.GetBranches(settings.Username, settings.Password, settings.Owner,
                 settings.Repository);
+            var tags = await _gitHubService.GetTags(settings.Username, settings.Password, settings.Owner,
+                settings.Repository);
 
             var model = new GitModel
             {
                 RepositoryName = settings.Repository,
                 Commits = _gitMapper.MapCommits(commits),
                 NumberOfTodaysCommits = _gitMapper.GetNumberOfTodaysCommits(commits),
-                BranchesCount = branches.Length
+                BranchesCount = branches.Length,
+                TagsCount = tags.Length
             };
             return PartialView(model);
         }
