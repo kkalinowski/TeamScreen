@@ -252,3 +252,4 @@ paket-files/
 *.sln.iml
 TeamScreen/TeamScreen.Plugin.TeamCity/Properties/launchSettings.json
 TeamScreen/TeamScreen.Plugin.Jira/Properties/launchSettings.json
+TeamScreen/TeamScreen.Plugin.Git/Properties/launchSettings.json

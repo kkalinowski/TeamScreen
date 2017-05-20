@@ -111,7 +111,7 @@ namespace TeamScreen
 
         private Assembly[] GetPluginAssemblies()
         {
-            return Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "TeamScreen.Plugin.ProjectTeam.dll", SearchOption.AllDirectories)
+            return Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "TeamScreen.Plugin.Git.dll", SearchOption.AllDirectories)
                 .Where(x => !x.Contains("TeamScreen.Plugin.Base.dll"))
                 .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
                 .ToArray();

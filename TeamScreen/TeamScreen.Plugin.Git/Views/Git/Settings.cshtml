@@ -1,0 +1,37 @@
+﻿<form id="app">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" required="required" v-model="settings.username">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" required="required" v-model="settings.password">
+        <label for="owner">Owner</label>
+        <input type="text" class="form-control" id="owner" required="required" v-model="settings.owner">
+        <label for="repository">Repository</label>
+        <input type="text" class="form-control" id="repository" required="required" v-model="settings.repository">
+    </div>
+    <button class="btn btn-default" v-on:click.prevent="saveSettings">Save</button>
+    <span v-if="saved" class="label label-success">saved</span>
+</form>
+
+<script type="text/javascript">
+    var gitSettingsVM = new Vue({
+        el: "#app",
+        data: {
+            settings: {},
+            saved: false
+        },
+        methods: {
+            saveSettings: function (url) {
+                this.saved = false;
+                this.$http.post('@Url.Action("SaveSettings", "Git")', this.settings).then(function() {
+                    this.saved = true;
+                });
+            }
+        },
+        created: function() {
+            this.$http.get('@Url.Action("GetSettings", "Git")').then(function(response) {
+                this.settings = response.body;
+            });
+        },
+    });
+</script>

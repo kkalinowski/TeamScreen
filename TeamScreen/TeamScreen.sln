@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamScreen.Plugin.HealthChe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamScreen.Plugin.ProjectTeam", "TeamScreen.Plugin.ProjectTeam\TeamScreen.Plugin.ProjectTeam.csproj", "{FE040B3C-ADDE-4E72-9F8C-63A17B85CCBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamScreen.Plugin.Git", "TeamScreen.Plugin.Git\TeamScreen.Plugin.Git.csproj", "{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{FE040B3C-ADDE-4E72-9F8C-63A17B85CCBF}.Release|x64.Build.0 = Release|Any CPU
 		{FE040B3C-ADDE-4E72-9F8C-63A17B85CCBF}.Release|x86.ActiveCfg = Release|Any CPU
 		{FE040B3C-ADDE-4E72-9F8C-63A17B85CCBF}.Release|x86.Build.0 = Release|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Debug|x64.Build.0 = Debug|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Debug|x86.Build.0 = Debug|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Release|x64.ActiveCfg = Release|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Release|x64.Build.0 = Release|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Release|x86.ActiveCfg = Release|Any CPU
+		{96B1A15A-5A47-4DD7-85CC-A938D1C4E746}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

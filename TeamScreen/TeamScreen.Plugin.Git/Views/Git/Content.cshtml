@@ -1,0 +1,38 @@
+﻿@model TeamScreen.Plugin.Git.Models.GitModel
+
+<style>
+    .commit {
+        height: 6em;
+    }
+
+        .commit img {
+            width: 4.5em;
+            margin-top: -1.8em;
+        }
+</style>
+
+<h1>@Model.RepositoryName repository</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Recent commits:</h2>
+            @foreach (var commit in Model.Commits)
+            {
+                <div class="commit clearfix">
+                    <h4>@commit.Message</h4>
+                    @commit.Date
+
+                    <img class="pull-right" src="@Url.Action("GetByEmail", "Photo", new {email = commit.AuthorEmail})" />
+                </div>
+            }
+        </div>
+        <div class="col-xs-6">
+            <h2>Statistics:</h2>
+            <h4>Number of commits today: @Model.NumberOfTodaysCommits</h4>
+            <h4>Number of collaborators: @Model.CollaboratorsCount</h4>
+            <h4>Number of branches: @Model.BranchesCount</h4>
+            <h4>Number of tags: @Model.TagsCount</h4>
+        </div>
+    </div>
+</div>
