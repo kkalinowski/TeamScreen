@@ -13,7 +13,7 @@
             {
                 <div>
                     <span class="build-name">@build.Name </span>
-                    <span class="build-info pull-right">@build.Date</span>
+                    <span class="build-info pull-right date" date="@build.Date"></span>
                     <div class="progress">
                         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                             <span class="sr-only">100% Complete (success)</span>
@@ -25,7 +25,7 @@
             {
                 <div>
                     <span class="build-name">@build.Name </span>
-                    <span class="build-info pull-right">@build.TriggeredBy @build.Date</span>
+                    <span class="build-info pull-right">@build.TriggeredBy <span class="date" date="@build.Date"></span></span>
                     <div class="progress">
                         <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"
                              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -38,7 +38,7 @@
             {
                 <div>
                     <span class="build-name">@build.Name </span>
-                    <span class="build-info pull-right">@build.TriggeredBy @build.Date</span>
+                    <span class="build-info pull-right">@build.TriggeredBy <span class="date" date="@build.Date"></span></span>
                     <div class="progress">
                         <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                             <span class="sr-only">100% Complete (failure)</span>
@@ -49,3 +49,12 @@
         }
     }
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".date").each(function () {
+            var date = moment($(this).attr('date'));
+            $(this).html(date.fromNow());
+        });
+    });
+</script>
