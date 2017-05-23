@@ -1,8 +1,10 @@
 @model TeamScreen.Models.Container.ContainerModel
 
 <div id="app">
-    <div id="contentContainer"></div>
-    
+    <div id="contentContainer">
+        <h2>You need to enable plugins in <a asp-controller="Settings" asp-action="SinglePluginSettings" asp-route-plugin="@Const.CorePluginName">Settings view</a></h2>
+    </div>
+
     <div class="controls-container hover-trigger">
         <div class="controls pull-right">
             <i class="fa fa-circle-o-notch fa-spin" v-if="loading"></i>
@@ -19,8 +21,8 @@
                     <i class="fa fa-user settings-button" aria-hidden="true"></i>
                 </a>
                 @*<a href='@Url.Action("Logout", "Account")'>
-                    <i class="fa fa-sign-out settings-button" aria-hidden="true"></i>
-                </a>*@
+                        <i class="fa fa-sign-out settings-button" aria-hidden="true"></i>
+                    </a>*@
             </div>
         </div>
     </div>
@@ -39,6 +41,12 @@
                 paused: false,
                 loading: false,
                 timer: 0,
+            },
+
+            computed: {
+                isAnyPluginAvailable: function() {
+                    return this.availablePlugins;
+                }
             },
 
             methods: {
@@ -136,6 +144,8 @@
             mounted: function () {
                 this.$http.get('@Url.Action("GetUsedPluginsUrls", "Plugin")').then(function(response) {
                     this.availablePlugins = response.body;
+                    if (!this.isAnyPluginAvailable())
+                        return;
 
                     this.loadNextPlugin();
                     setInterval(this.tick, 1000);
