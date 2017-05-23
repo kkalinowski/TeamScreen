@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TeamScreen.Data.Services;
 using TeamScreen.Models.Settings;
 using TeamScreen.Plugin.Base;
 
@@ -8,7 +10,7 @@ namespace TeamScreen.Services.Plugins
 {
     public interface IPluginService
     {
-        string[] GetUsedPluginsUrls(IUrlHelper urlHelper);
+        Task<string[]> GetUsedPluginsUrlsAsync(IUrlHelper urlHelper);
         string[] GetPluginsNames();
         PluginSettingsEndpoint GetPluginSettingsUrls(string pluginName, IUrlHelper urlHelper);
     }
@@ -16,15 +18,19 @@ namespace TeamScreen.Services.Plugins
     public class PluginService : IPluginService
     {
         private readonly IEnumerable<IPlugin> _plugins;
+        private readonly ISettingsService _settingsService;
 
-        public PluginService(IEnumerable<IPlugin> plugins)
+        public PluginService(IEnumerable<IPlugin> plugins, ISettingsService settingsService)
         {
-            this._plugins = plugins;
+            _plugins = plugins;
+            _settingsService = settingsService;
         }
 
-        public string[] GetUsedPluginsUrls(IUrlHelper urlHelper)
+        public async Task<string[]> GetUsedPluginsUrlsAsync(IUrlHelper urlHelper)
         {
+            var coreSettings = await _settingsService.Get<CoreSettings>(Const.CorePluginName);
             return _plugins
+                .Where(x => coreSettings.EnabledPluggins.Contains(x.Name))
                 .Select(x => x.GetContentUrl(urlHelper))
                 .ToArray();
         }

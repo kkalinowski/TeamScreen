@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TeamScreen.Services.Plugins;
 
@@ -12,9 +13,10 @@ namespace TeamScreen.Controllers
             _pluginService = pluginService;
         }
 
-        public IActionResult GetUsedPluginsUrls()
+        public async Task<IActionResult> GetUsedPluginsUrls()
         {
-            return Json(_pluginService.GetUsedPluginsUrls(Url));
+            var pluginsUrls = await _pluginService.GetUsedPluginsUrlsAsync(Url);
+            return Json(pluginsUrls);
         }
     }
 }
