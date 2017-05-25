@@ -8,6 +8,11 @@ namespace TeamScreen.Models.Settings
         public int Interval { get; set; }
         public PluginUsage[] Plugins { get; set; }
 
+        public CoreSettingsModel()
+        {
+            //needed for model binding
+        }
+
         public CoreSettingsModel(CoreSettings settings, IEnumerable<string> plugins)
         {
             Interval = settings.Interval;

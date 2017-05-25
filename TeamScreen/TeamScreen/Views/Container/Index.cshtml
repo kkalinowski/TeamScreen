@@ -1,9 +1,10 @@
 @model TeamScreen.Models.Container.ContainerModel
 
 <div id="app">
-    <div id="contentContainer">
-        <h2>You need to enable plugins in <a asp-controller="Settings" asp-action="SinglePluginSettings" asp-route-plugin="@Const.CorePluginName">Settings view</a></h2>
+    <div id="contentContainer" v-if="isAnyPluginAvailable">
+
     </div>
+    <h2 v-show="!isAnyPluginAvailable">You need to enable plugins in <a asp-controller="Settings" asp-action="SinglePluginSettings" asp-route-plugin="@Const.CorePluginName">Settings view</a></h2>
 
     <div class="controls-container hover-trigger">
         <div class="controls pull-right">
@@ -142,7 +143,7 @@
             mounted: function () {
                 this.$http.get('@Url.Action("GetUsedPluginsUrls", "Plugin")').then(function(response) {
                     this.availablePlugins = response.body;
-                    if (!this.isAnyPluginAvailable())
+                    if (!this.isAnyPluginAvailable)
                         return;
 
                     this.loadNextPlugin();
