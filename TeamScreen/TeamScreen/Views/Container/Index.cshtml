@@ -5,6 +5,7 @@
 
     </div>
     <h2 v-show="!isAnyPluginAvailable">You need to enable plugins in <a asp-controller="Settings" asp-action="SinglePluginSettings" asp-route-plugin="@Const.CorePluginName">Settings view</a></h2>
+    <h2 v-show="pluginError">There was an error during loading next plugin. <a asp-controller="Settings" asp-action="Index">Check if its setup is correct</a></h2>
 
     <div class="controls-container hover-trigger">
         <div class="controls pull-right">
@@ -40,6 +41,7 @@
                 paused: false,
                 loading: false,
                 timer: 0,
+                pluginError: false
             },
 
             computed: {
@@ -134,16 +136,17 @@
                     }
                 },
 
-                loadingDone: function () {
+                loadingDone: function (response, status) {
                     //need to be done this way - http://stackoverflow.com/questions/8905143/jquery-load-doesnt-work-with-a-defined-function-as-a-callback
                     this.loading = false;
+                    this.pluginError = status === "error";
                 }
             },
 
             mounted: function () {
                 this.$http.get('@Url.Action("GetUsedPluginsUrls", "Plugin")').then(function(response) {
                     this.availablePlugins = response.body;
-                    if (!this.isAnyPluginAvailable)
+                    if (this.availablePlugins)
                         return;
 
                     this.loadNextPlugin();
