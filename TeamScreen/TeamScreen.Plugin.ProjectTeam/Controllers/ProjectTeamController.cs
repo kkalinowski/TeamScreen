@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TeamScreen.Data.Entities;
 using TeamScreen.Data.Services;
+using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Plugin.ProjectTeam.Models;
 
 namespace TeamScreen.Plugin.ProjectTeam.Controllers
@@ -29,7 +30,7 @@ namespace TeamScreen.Plugin.ProjectTeam.Controllers
             {
                 ProjectName = settings.Name,
                 Description = settings.Description,
-                UsedTechnologies = settings.Techs.Split(',').Select(x => x.Trim()).ToArray(),
+                UsedTechnologies = settings.Techs.Recover().Split(',').Select(x => x.Trim()).ToArray(),
                 People = users
             };
             return PartialView(model);

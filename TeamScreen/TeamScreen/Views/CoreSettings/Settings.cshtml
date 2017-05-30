@@ -3,6 +3,13 @@
         <label for="interval">Plugin change interval in seconds</label>
         <input type="number" class="form-control" id="interval" v-model="settings.interval" min="5">
     </div>
+    <h2>Available plugins:</h2>
+    <template v-for="plugin in settings.plugins">
+        <h4>
+            {{plugin.name}}
+            <input class="pull-left" style="margin-right: 0.3em" type="checkbox" v-model="plugin.enabled">
+        </h4>
+    </template>
     <button class="btn btn-default" v-on:click.prevent="saveSettings">Save</button>
     <span v-if="saved" class="label label-success">saved</span>
 </form>

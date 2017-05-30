@@ -21,8 +21,8 @@
             {
                 <div class="commit clearfix">
                     <h4>@commit.Message</h4>
-                    @commit.Date
-
+                    <span class="date" date="@commit.Date"></span>
+                    
                     <img class="pull-right" src="@Url.Action("GetByEmail", "Photo", new {email = commit.AuthorEmail})" />
                 </div>
             }
@@ -36,3 +36,12 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".date").each(function () {
+            var date = moment($(this).attr('date'));
+            $(this).html(date.fromNow());
+        });
+    });
+</script>
