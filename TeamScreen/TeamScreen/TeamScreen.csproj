@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -24,11 +24,6 @@
     <None Remove="wwwroot\lib\bootstrap\**" />
   </ItemGroup>
 
-  <!--<ItemGroup>
-    <Content Include="wwwroot\css\bootstrap.min.css" />
-    <Content Include="wwwroot\favicon.ico" />
-    <Content Include="wwwroot\images\fallback_photo.png" />
-  </ItemGroup>-->
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.5.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.1.0" />
