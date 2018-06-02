@@ -21,7 +21,6 @@ namespace TeamScreen.Controllers
         public ManageController(
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
-          IOptions<IdentityCookieOptions> identityCookieOptions,
           ILoggerFactory loggerFactory)
         {
             _userManager = userManager;

@@ -20,6 +20,7 @@ using TeamScreen.Data.Services;
 using TeamScreen.Plugin.Base.Extensions;
 using TeamScreen.Services.Plugins;
 using TeamScreen.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace TeamScreen
 {
